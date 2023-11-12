@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/student/SMS/student_index.dart';
+import 'package:flutter_application_1/Roles/Student/SMS/student_index.dart';
 
 class ProfilePage extends StatelessWidget {
   final String username;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/student/admin_student_index.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/teacher/admin_teacher_index.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/student/admin_student_index.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/admin_teacher_index.dart';
 import 'course/admin_course_index.dart';
 // Import the AdminTeacher class
 

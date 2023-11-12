@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Credentials/logout.dart';
+import 'package:flutter_application_1/Roles/Student/Side_Nav/student_view_profile.dart';
 import 'package:flutter_application_1/chat.dart';
 import 'package:flutter_application_1/contact.dart';
 import 'package:flutter_application_1/inbox.dart';
 import 'package:flutter_application_1/settings.dart';
-import 'package:flutter_application_1/student/Side_Nav/student_view_profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';

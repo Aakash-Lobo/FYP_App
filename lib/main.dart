@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/Roles/Admin/admin_home.dart';
 import 'package:flutter_application_1/Roles/Teacher/teacher_home.dart';
 import 'package:flutter_application_1/Roles/student/student_home.dart';
-import 'package:flutter_application_1/admin/admin_home.dart';
-
 import 'Credentials/login.dart'; // Import the admin home page
 
 void main() {

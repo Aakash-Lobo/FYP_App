@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../chat.dart';
-import '../contact.dart';
-import '../inbox.dart';
-import '../student/Bottom_Nav/student_profile.dart';
-import '../Credentials/logout.dart'; // Import the LogoutDialog class
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.dart';
+import '../../chat.dart';
+import '../../contact.dart';
+import '../../inbox.dart';
+import '../../Credentials/logout.dart'; // Import the LogoutDialog class
 
 class TeacherHomePage extends StatefulWidget {
   final String username;

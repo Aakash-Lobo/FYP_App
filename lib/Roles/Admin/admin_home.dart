@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../contact.dart';
-import '../Credentials/logout.dart';
-import '../chat.dart';
-import '../inbox.dart';
-import '../settings.dart';
+import '../../contact.dart';
+import '../../Credentials/logout.dart';
+import '../../chat.dart';
+import '../../inbox.dart';
+import '../../settings.dart';
 import 'Bottom_Nav/profile/admin_profile.dart';
 
 class AdminHomePage extends StatefulWidget {

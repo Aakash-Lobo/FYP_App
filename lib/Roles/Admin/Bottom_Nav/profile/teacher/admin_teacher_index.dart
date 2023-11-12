@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/student/AssignStudentSubjectsPage.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/teacher/AddTeacherPage.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/teacher/AssignTeacherSubjectsPage.dart';
-import 'package:flutter_application_1/admin/Bottom_Nav/profile/teacher/ViewTeacherPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/AddTeacherPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/AssignTeacherSubjectsPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/ViewTeacherPage.dart';
 import '../../../admin_home.dart';
 import '../admin_profile.dart';
 
