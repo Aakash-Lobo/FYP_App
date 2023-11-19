@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Modules/Librarian/EditBookPage.dart';
+import 'package:flutter_application_1/Modules/Librarian/BookViewPage%20.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -68,14 +68,122 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
     }
   }
 
-  void navigateToEditPage(String bookId) {
+  Future<void> updateBook(
+      String bookId, String updatedTitle, String updatedAuthor) async {
+    try {
+      final response = await http.post(
+        Uri.parse("http://localhost/fyp/app/modules/lib/updatebook.php"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'book_id': bookId,
+          'book_title': updatedTitle,
+          'author': updatedAuthor,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> result = json.decode(response.body);
+
+        if (result['status'] == 'success') {
+          // Successful update
+          print('Book with ID $bookId updated successfully');
+        } else {
+          // Error in update
+          print('Failed to update book with ID $bookId. ${result['message']}');
+        }
+      } else {
+        print(
+            'Failed to update book with ID $bookId. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+
+      // Refresh the data after updating
+      fetchData();
+    } catch (error) {
+      print('Error updating book: $error');
+    }
+  }
+
+  void _showEditModal(Map<String, dynamic> book) {
+    TextEditingController _titleController = TextEditingController();
+    TextEditingController _authorController = TextEditingController();
+
+    _titleController.text = book['book_title'];
+    _authorController.text = book['author'];
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Edit Book',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 16.0),
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(labelText: 'Title'),
+              ),
+              TextField(
+                controller: _authorController,
+                decoration: InputDecoration(labelText: 'Author'),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Show confirmation dialog
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Confirm Update'),
+                        content:
+                            Text('Are you sure you want to update this book?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // Perform the update
+                              updateBook(
+                                book['book_id'],
+                                _titleController.text,
+                                _authorController.text,
+                              );
+                              Navigator.of(context)
+                                  .pop(); // Close the confirmation dialog
+                              Navigator.pop(context); // Close the bottom sheet
+                            },
+                            child: Text('Yes'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Text('Update'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _navigateToViewPage(Map<String, dynamic> book) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EditBookPage(bookId: bookId),
+        builder: (context) => BookViewPage(book: book),
       ),
-    ).then((value) =>
-        fetchData()); // Fetch data after returning from the edit page
+    );
   }
 
   @override
@@ -156,9 +264,16 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
                           SizedBox(width: 8),
                           ElevatedButton(
                             onPressed: () {
-                              navigateToEditPage(book['book_id']);
+                              _showEditModal(book);
                             },
                             child: Text('Edit'),
+                          ),
+                          SizedBox(width: 8),
+                          ElevatedButton(
+                            onPressed: () {
+                              _navigateToViewPage(book);
+                            },
+                            child: Text('View'),
                           ),
                         ],
                       ),

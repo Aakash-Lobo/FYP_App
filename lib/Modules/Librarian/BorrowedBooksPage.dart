@@ -4,11 +4,13 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class BorrowedBook {
-  final String bookBarcode;
-  final String borrowerName;
-  final String bookTitle;
-  final String dateBorrowed;
-  final String dueDate;
+  final String? bookBarcode;
+  final String? borrowerName;
+  final String? bookTitle;
+  final String? dateBorrowed;
+  final String? dueDate;
+  final String? dateReturned;
+  final String? status;
 
   BorrowedBook({
     required this.bookBarcode,
@@ -16,6 +18,8 @@ class BorrowedBook {
     required this.bookTitle,
     required this.dateBorrowed,
     required this.dueDate,
+    required this.dateReturned,
+    required this.status,
   });
 
   factory BorrowedBook.fromJson(Map<String, dynamic> json) {
@@ -23,10 +27,10 @@ class BorrowedBook {
       bookBarcode: json['book_barcode'],
       borrowerName: '${json['first_name']} ${json['last_name']}',
       bookTitle: json['book_title'],
-      dateBorrowed: DateFormat("M d, y h:m:s a")
-          .format(DateTime.parse(json['date_borrowed'])),
-      dueDate:
-          DateFormat("M d, y h:m:s a").format(DateTime.parse(json['due_date'])),
+      dateBorrowed: json['date_borrowed'],
+      dueDate: json['due_date'],
+      dateReturned: json['date_returned'],
+      status: json['borrowed_status'],
     );
   }
 }
@@ -42,8 +46,8 @@ class BorrowedBooksPage extends StatefulWidget {
 
 class _BorrowedBooksPageState extends State<BorrowedBooksPage> {
   List<BorrowedBook> borrowedBooks = [];
-  String dateFrom = DateFormat('yyyy-MM-dd').format(DateTime.now());
-  String dateTo = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  String? dateFrom;
+  String? dateTo;
 
   @override
   void initState() {
@@ -53,18 +57,25 @@ class _BorrowedBooksPageState extends State<BorrowedBooksPage> {
 
   Future<void> fetchBorrowedBooks() async {
     try {
-      final response = await http.get(
-        Uri.parse(
-          "http://localhost/fyp/app/modules/lib/viewborrowedbooks.php?dateFrom=$dateFrom&dateTo=$dateTo",
-        ),
-      );
+      String apiUrl =
+          "http://localhost/fyp/app/modules/lib/viewborrowedbooks.php";
+
+      if (dateFrom != null && dateTo != null) {
+        apiUrl += "?dateFrom=$dateFrom&dateTo=$dateTo";
+      }
+
+      final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
-        setState(() {
-          borrowedBooks =
-              data.map((book) => BorrowedBook.fromJson(book)).toList();
-        });
+
+        // Check if data is not null before mapping
+        if (data != null) {
+          setState(() {
+            borrowedBooks =
+                data.map((book) => BorrowedBook.fromJson(book)).toList();
+          });
+        }
       } else {
         print('HTTP request failed with status: ${response.statusCode}');
         print('Response body: ${response.body}');
@@ -74,7 +85,6 @@ class _BorrowedBooksPageState extends State<BorrowedBooksPage> {
     }
   }
 
-  // Function to update date filters
   void updateDateFilters() {
     fetchBorrowedBooks();
   }
@@ -143,29 +153,33 @@ class _BorrowedBooksPageState extends State<BorrowedBooksPage> {
                 ),
               ],
             ),
-
             SizedBox(height: 20),
             // Display Borrowed Books
             Expanded(
-              child: ListView.builder(
-                itemCount: borrowedBooks.length,
-                itemBuilder: (context, index) {
-                  BorrowedBook book = borrowedBooks[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(book.bookTitle),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Barcode: ${book.bookBarcode}'),
-                          Text('Borrower: ${book.borrowerName}'),
-                          Text('Date Borrowed: ${book.dateBorrowed}'),
-                          Text('Due Date: ${book.dueDate}'),
-                        ],
-                      ),
-                    ),
+              child: DataTable(
+                columns: [
+                  DataColumn(label: Text('Barcode')),
+                  DataColumn(label: Text('Borrower')),
+                  DataColumn(label: Text('Title')),
+                  DataColumn(label: Text('Date Borrowed')),
+                  DataColumn(label: Text('Due Date')),
+                  DataColumn(label: Text('Date Returned')),
+                  DataColumn(label: Text('Status')),
+                ],
+                rows: borrowedBooks.map((book) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(book.bookBarcode ?? 'Unknown Barcode')),
+                      DataCell(Text(book.borrowerName ?? 'Unknown Borrower')),
+                      DataCell(Text(book.bookTitle ?? 'Unknown Title')),
+                      DataCell(
+                          Text(book.dateBorrowed ?? 'Unknown Date Borrowed')),
+                      DataCell(Text(book.dueDate ?? 'Unknown Due Date')),
+                      DataCell(Text(book.dateReturned ?? 'Not Returned')),
+                      DataCell(Text(book.status ?? 'Unknown Status')),
+                    ],
                   );
-                },
+                }).toList(),
               ),
             ),
           ],
