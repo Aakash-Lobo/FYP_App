@@ -216,12 +216,12 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
                     DataCell(
                       book['book_image'] != null
                           ? Image.network(
-                              "http://localhost/fyp/app/admin/profile/book/Images/${book['book_image']}",
+                              "http://localhost/fyp/app/modules/lib/Images/${book['book_image']}",
                               width: 50,
                               height: 50,
                             )
                           : Image.network(
-                              "http://localhost/fyp/app/admin/profile/book/Images/book_image.jpg",
+                              "http://localhost/fyp/app/modules/lib/Images/book_image.jpg",
                               width: 50,
                               height: 50,
                             ),
