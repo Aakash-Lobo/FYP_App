@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Credentials/logout.dart';
-import 'package:flutter_application_1/Roles/Student/Side_Nav/student_view_profile.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.dart';
 import 'package:flutter_application_1/chat.dart';
 import 'package:flutter_application_1/contact.dart';
 import 'package:flutter_application_1/inbox.dart';
@@ -143,7 +143,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
               ),
             ),
           ),
-          ViewStudentProfilePage(username: widget.username),
+          StudentProfilePage(username: widget.username),
           InboxPage(username: widget.username),
         ],
       ),
@@ -219,8 +219,7 @@ class CustomSideNavigationBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      ViewStudentProfilePage(username: username),
+                  builder: (context) => StudentProfilePage(username: username),
                 ),
               );
             },

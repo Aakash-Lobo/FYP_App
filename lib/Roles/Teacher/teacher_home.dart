@@ -61,7 +61,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               ],
             ),
           ),
-          ProfilePage(username: widget.username),
+          StudentProfilePage(username: widget.username),
           InboxPage(
               username: widget.username), // Pass the username to the InboxPage
         ],
