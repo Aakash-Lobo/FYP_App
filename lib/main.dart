@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Placement/placement_home.dart';
 import 'package:flutter_application_1/Roles/Admin/admin_home.dart';
 import 'package:flutter_application_1/Roles/Staff/staff_home.dart';
 import 'package:flutter_application_1/Roles/Teacher/teacher_home.dart';
@@ -21,8 +22,10 @@ void main() {
         '/teacher_home': (context) =>
             TeacherHomePage(username: 'your_username'),
         '/admin_home': (context) => AdminHomePage(username: 'your_username'),
-        '/librarian_home': (context) => LibrarianHomePage(
-            username: 'your_username'), // Add route for admin home page
+        '/librarian_home': (context) =>
+            LibrarianHomePage(username: 'your_username'),
+        '/placement_home': (context) =>
+            PlacementHomePage(username: 'your_username'),
       },
     ),
   );

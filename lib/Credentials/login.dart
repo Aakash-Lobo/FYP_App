@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Modules/Librarian/librarian_home.dart';
+import 'package:flutter_application_1/Modules/Placement/placement_home.dart';
 import 'package:flutter_application_1/Roles/Admin/admin_home.dart';
 import 'package:flutter_application_1/Roles/student/student_home.dart';
 import 'package:flutter_application_1/Roles/Teacher/teacher_home.dart';
@@ -59,6 +60,13 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) => LibrarianHomePage(username: username),
+            ),
+          );
+        } else if (role == 'placement') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlacementHomePage(username: username),
             ),
           );
         } else {
