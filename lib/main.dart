@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
 import 'package:flutter_application_1/Modules/Placement/placement_home.dart';
 import 'package:flutter_application_1/Roles/Admin/admin_home.dart';
 import 'package:flutter_application_1/Roles/Staff/staff_home.dart';
@@ -26,6 +27,8 @@ void main() {
             LibrarianHomePage(username: 'your_username'),
         '/placement_home': (context) =>
             PlacementHomePage(username: 'your_username'),
+        '/examiner_home': (context) =>
+            ExaminerHomePage(username: 'your_username'),
       },
     ),
   );
