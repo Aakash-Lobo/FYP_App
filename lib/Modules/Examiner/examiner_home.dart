@@ -7,7 +7,6 @@ import 'package:flutter_application_1/Modules/Examiner/ViewExamPage.dart';
 import 'package:flutter_application_1/Modules/Examiner/ViewExamineePage.dart';
 import 'package:flutter_application_1/Modules/Examiner/ViewRankingPage.dart';
 import 'package:flutter_application_1/Modules/Examiner/ViewReportPage.dart';
-import 'package:flutter_application_1/contact.dart';
 
 class ExaminerHomePage extends StatefulWidget {
   final String username;
@@ -23,7 +22,7 @@ class _ExaminerHomePageState extends State<ExaminerHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Librarian Home Page'),
+        title: Text('Exam Home Page'),
       ),
       body: Center(
         child: Column(
