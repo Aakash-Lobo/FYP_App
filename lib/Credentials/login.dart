@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Chef/chef_home.dart';
 import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
 import 'package:flutter_application_1/Modules/Librarian/librarian_home.dart';
 import 'package:flutter_application_1/Modules/Placement/placement_home.dart';
@@ -75,6 +76,13 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) => ExaminerHomePage(username: username),
+            ),
+          );
+        } else if (role == 'chef') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChefHomePage(username: username),
             ),
           );
         } else {
