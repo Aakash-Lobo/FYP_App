@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Warden/warden_home.dart';
 import 'package:flutter_application_1/Modules/Chef/chef_home.dart';
 import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
 import 'package:flutter_application_1/Modules/Librarian/librarian_home.dart';
@@ -83,6 +84,13 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
               builder: (context) => ChefHomePage(username: username),
+            ),
+          );
+        } else if (role == 'warden') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WardenHomePage(username: username),
             ),
           );
         } else {

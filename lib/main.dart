@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Warden/warden_home.dart';
 import 'package:flutter_application_1/Modules/Chef/chef_home.dart';
 import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
 import 'package:flutter_application_1/Modules/Placement/placement_home.dart';
@@ -31,6 +32,7 @@ void main() {
         '/examiner_home': (context) =>
             ExaminerHomePage(username: 'your_username'),
         '/chef_home': (context) => ChefHomePage(username: 'your_username'),
+        '/warden_home': (context) => WardenHomePage(username: 'your_username'),
       },
     ),
   );
