@@ -45,8 +45,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Add Student'),
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Text(
+          'Add Student',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,15 +62,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              Text(
-                'Add Student Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               TextFormField(
                 controller: firstNameController,
-                decoration:
-                    InputDecoration(labelText: 'Applicant First Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Applicant First Name:*',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the first name';
@@ -70,28 +79,59 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: middleNameController,
-                decoration:
-                    InputDecoration(labelText: 'Applicant Middle Name:'),
+                decoration: InputDecoration(
+                  labelText: 'Applicant Middle Name:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: lastNameController,
-                decoration: InputDecoration(labelText: 'Applicant Last Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Applicant Last Name:*',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: fatherNameController,
-                decoration: InputDecoration(labelText: 'Father Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Father Name:*',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: rollNoController,
-                decoration: InputDecoration(labelText: 'Student Roll No:'),
+                decoration: InputDecoration(
+                  labelText: 'Student Roll No:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Applicant Email:*',
-                  hintText: 'example@example.com',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains('@')) {
@@ -100,6 +140,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Course which you want?:',
                 options: ['Option1', 'Option2', 'Option3'],
@@ -110,6 +151,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Prospectus Issued:',
                 options: ['Yes', 'No'],
@@ -120,6 +162,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Prospectus Amount Recvd:',
                 options: ['Yes', 'No'],
@@ -130,6 +173,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Applicant Status:',
                 options: ['Admitted', 'Not Admitted'],
@@ -140,6 +184,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Application Status:',
                 options: ['Approved', 'Not Approved'],
@@ -150,13 +195,27 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: dobController,
-                decoration: InputDecoration(labelText: 'Date of Birth:'),
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: mobileNoController,
-                decoration: InputDecoration(labelText: 'Mobile No:*'),
+                decoration: InputDecoration(
+                  labelText: 'Mobile No:*',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the mobile number';
@@ -164,6 +223,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 15),
               buildDropdownFormField(
                 labelText: 'Gender:',
                 options: ['Male', 'Female'],
@@ -174,17 +234,38 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   });
                 },
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: permanentAddressController,
-                decoration: InputDecoration(labelText: 'Permanent Address:'),
+                decoration: InputDecoration(
+                  labelText: 'Permanent Address:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: currentAddressController,
-                decoration: InputDecoration(labelText: 'Current Address:'),
+                decoration: InputDecoration(
+                  labelText: 'Current Address:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
+              SizedBox(height: 15),
               TextFormField(
                 controller: placeOfBirthController,
-                decoration: InputDecoration(labelText: 'Place of Birth:'),
+                decoration: InputDecoration(
+                  labelText: 'Place of Birth:',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
               SizedBox(height: 20),
               ElevatedButton(
@@ -194,7 +275,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
                     _submitForm();
                   }
                 },
-                child: Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 25),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ],
           ),
@@ -220,6 +310,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
       }).toList(),
       decoration: InputDecoration(
         labelText: labelText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
     );
   }
