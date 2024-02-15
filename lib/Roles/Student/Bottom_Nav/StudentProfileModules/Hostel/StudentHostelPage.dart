@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Student/student_home.dart';
 
-import 'AttemptedExamPage.dart';
-import 'StudentExamFeedbackPage.dart';
+import 'StudentRoomDetailPage.dart';
 
-class StudentExaminationPage extends StatefulWidget {
+class StudentHostelPage extends StatefulWidget {
   final String username;
 
-  StudentExaminationPage({required this.username});
+  StudentHostelPage({required this.username});
 
   @override
-  _StudentExaminationPageState createState() => _StudentExaminationPageState();
+  _StudentHostelPageState createState() => _StudentHostelPageState();
 }
 
-class _StudentExaminationPageState extends State<StudentExaminationPage> {
+class _StudentHostelPageState extends State<StudentHostelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exam Page'),
+        title: Text('Hostel Page'),
       ),
       body: Center(
         child: Column(
@@ -69,25 +68,13 @@ class CustomSideNavigationBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.library_books),
-            title: Text('Attempted Exam'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AttemptedExamPage(username: username),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.library_books),
-            title: Text('Feedback Page'),
+            title: Text('Room Details'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      StudentExamFeedbackPage(username: username),
+                      StudentRoomDetailPage(username: username),
                 ),
               );
             },

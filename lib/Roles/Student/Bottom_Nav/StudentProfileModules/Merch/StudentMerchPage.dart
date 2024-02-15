@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Cafe/CafeOrderPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/AppliedJobPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/CompanyMessage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/CompanyPage.dart';
@@ -6,16 +7,18 @@ import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileMod
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.dart';
 import 'package:flutter_application_1/Roles/Student/student_home.dart';
 
-class StudentPlacementPage extends StatefulWidget {
+import 'MerchCartPage.dart';
+
+class StudentMerchPage extends StatefulWidget {
   final String username;
 
-  StudentPlacementPage({required this.username});
+  StudentMerchPage({required this.username});
 
   @override
-  _StudentPlacementPageState createState() => _StudentPlacementPageState();
+  _StudentMerchPageState createState() => _StudentMerchPageState();
 }
 
-class _StudentPlacementPageState extends State<StudentPlacementPage> {
+class _StudentMerchPageState extends State<StudentMerchPage> {
   int _currentPageIndex = 0;
   final PageController _pageController = PageController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -28,7 +31,7 @@ class _StudentPlacementPageState extends State<StudentPlacementPage> {
       appBar: _currentPageIndex == 0
           ? AppBar(
               elevation: 0,
-              title: Text('Placement'),
+              title: Text('Merch'),
             )
           : null,
       drawer: CustomSideNavigationBar(
@@ -74,8 +77,7 @@ class _StudentPlacementPageState extends State<StudentPlacementPage> {
               ),
             ),
           ),
-          CompanyPage(username: widget.username),
-          CompanyMessage(username: widget.username),
+          MerchCartPage(username: widget.username),
         ],
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
@@ -108,11 +110,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Company',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.mail),
-          label: 'Inbox',
+          label: 'Cart',
         ),
       ],
       currentIndex: currentIndex,
@@ -124,7 +122,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   void _navigateToPage(int index, BuildContext context,
       PageController pageController, String username) {
-    if (index >= 0 && index < 3) {
+    if (index >= 0 && index < 2) {
       pageController.jumpToPage(index);
     }
   }
@@ -150,8 +148,7 @@ class CustomSideNavigationBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      StudentPlacementPage(username: username),
+                  builder: (context) => StudentMerchPage(username: username),
                 ),
               );
             },
@@ -169,24 +166,12 @@ class CustomSideNavigationBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.contacts),
-            title: Text('Applied'),
+            title: Text('Your Orders'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AppliedJobPage(username: username),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Notification'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => JobNotiPage(username: username),
+                  builder: (context) => CafeOrderPage(username: username),
                 ),
               );
             },

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/student/StudentAttendancePage.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/student/StudentFeePage.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Counselling/StudentCounsellingPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Course/StudentCoursesPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Exam/StudentExaminationPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Library/StudentLibraryPage.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Merch/StudentMerchPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/StudentPlacementPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/StudentResultPage.dart';
 import 'package:flutter_application_1/Roles/Student/SMS/student_index.dart';
+
+import 'StudentProfileModules/Hostel/StudentHostelPage.dart';
 
 class StudentProfilePage extends StatelessWidget {
   final String username;
@@ -91,7 +95,7 @@ class StudentProfilePage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: buildSquare("Courses", Icons.menu_book),
+                  child: buildSquare("Notes", Icons.menu_book),
                 ),
               ],
             ),
@@ -187,12 +191,13 @@ class StudentProfilePage extends StatelessWidget {
                   onTap: () {
                     // Navigate to the MerchPage with the username
                     // (You need to replace MerchPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => MerchPage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StudentMerchPage(username: username),
+                      ),
+                    );
                   },
                   child: buildRectangle("Merch"),
                 ),
@@ -210,12 +215,13 @@ class StudentProfilePage extends StatelessWidget {
                   onTap: () {
                     // Navigate to the CafePage with the username
                     // (You need to replace CafePage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => CafePage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StudentCafePage(username: username),
+                      ),
+                    );
                   },
                   child: buildRectangle("Cafe"),
                 ),
@@ -263,12 +269,13 @@ class StudentProfilePage extends StatelessWidget {
                   onTap: () {
                     // Navigate to the HostelPage with the username
                     // (You need to replace HostelPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => HostelPage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StudentHostelPage(username: username),
+                      ),
+                    );
                   },
                   child: buildRectangle("Hostel"),
                 ),
@@ -278,40 +285,6 @@ class StudentProfilePage extends StatelessWidget {
             SizedBox(height: 20),
 
             // Sixth Row with two rectangles
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Rectangle 7 - Amenities
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the AmenitiesPage with the username
-                    // (You need to replace AmenitiesPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => AmenitiesPage(username: username),
-                    //   ),
-                    // );
-                  },
-                  child: buildRectangle("Amenities"),
-                ),
-
-                // Rectangle 8 - Calendar
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the CalendarPage with the username
-                    // (You need to replace CalendarPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => CalendarPage(username: username),
-                    //   ),
-                    // );
-                  },
-                  child: buildRectangle("Calendar"),
-                ),
-              ],
-            ),
           ],
         ),
       ),

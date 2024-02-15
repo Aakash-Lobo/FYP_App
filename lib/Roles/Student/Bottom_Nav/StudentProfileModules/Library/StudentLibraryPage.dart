@@ -1,31 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.dart';
 import 'package:flutter_application_1/Roles/Student/student_home.dart';
 
-class StudentLibraryPage extends StatelessWidget {
+import 'BorrowBookPage.dart';
+import 'MyBookPage.dart';
+
+class StudentLibraryPage extends StatefulWidget {
   final String username;
 
   StudentLibraryPage({required this.username});
 
+  @override
+  _StudentLibraryPageState createState() => _StudentLibraryPageState();
+}
+
+class _StudentLibraryPageState extends State<StudentLibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Library Page'),
       ),
-      drawer: CustomSideNavigationBar(username: username),
       body: Center(
-        child: Text('Welcome to the Library Page, $username!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Welcome, ${widget.username}!',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            // Add librarian home page content here
+          ],
+        ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(username: username),
+      drawer: CustomSideNavigationBar(
+        username: widget.username,
+        onLogout: (bool isLoggingOut) {
+          if (isLoggingOut) {
+            // Log the user out and navigate to the login page
+            Navigator.pushReplacementNamed(context, '/login');
+          }
+        },
+      ),
     );
   }
 }
 
 class CustomSideNavigationBar extends StatelessWidget {
   final String username;
+  final Function(bool) onLogout;
 
-  CustomSideNavigationBar({required this.username});
+  CustomSideNavigationBar({
+    required this.username,
+    required this.onLogout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +60,36 @@ class CustomSideNavigationBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Your Name',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+          UserAccountsDrawerHeader(
+            accountName: Text('Your Name'),
+            accountEmail: Text(username),
+            currentAccountPicture: CircleAvatar(
+                // Add your profile picture here
                 ),
-                Text(
-                  'View Profile',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
+          ),
+          ListTile(
+            leading: Icon(Icons.library_books),
+            title: Text('My Books'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyBookPage(username: username),
                 ),
-              ],
-            ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.library_books),
+            title: Text('Feedback Page'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BorrowBookPage(username: username),
+                ),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
@@ -97,73 +131,6 @@ class CustomSideNavigationBar extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class CustomBottomNavigationBar extends StatelessWidget {
-  final String username;
-
-  CustomBottomNavigationBar({required this.username});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.pages),
-          label: 'Plain Page',
-        ),
-      ],
-      onTap: (index) {
-        _navigateToPage(index, context);
-      },
-    );
-  }
-
-  void _navigateToPage(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        // Navigate to Home/Dashboard Page
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => StudentLibraryPage(username: username),
-          ),
-        );
-        break;
-      case 1:
-        // Navigate to Plain Page
-        // Replace PlainPage with the actual page class
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PlainPage(username: username),
-          ),
-        );
-        break;
-    }
-  }
-}
-
-class PlainPage extends StatelessWidget {
-  final String username;
-
-  PlainPage({required this.username});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Plain Page'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Plain Page, $username!'),
-      ),
     );
   }
 }
