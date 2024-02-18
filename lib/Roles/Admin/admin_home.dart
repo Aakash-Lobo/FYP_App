@@ -4,7 +4,7 @@ import '../../Credentials/logout.dart';
 import '../../chat.dart';
 import '../../inbox.dart';
 import '../../settings.dart';
-import 'Bottom_Nav/profile/admin_profile.dart';
+import 'Bottom_Nav/AdminProfileModules/admin_profile.dart';
 
 class AdminHomePage extends StatefulWidget {
   final String username;

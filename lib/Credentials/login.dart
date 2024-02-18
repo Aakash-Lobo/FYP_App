@@ -12,6 +12,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../Roles/Staff/staff_home.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key});
 
@@ -88,6 +90,13 @@ class _LoginPageState extends State<LoginPage> {
               context,
               MaterialPageRoute(
                 builder: (context) => TeacherHomePage(username: username),
+              ),
+            );
+          } else if (role == 'staff') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StaffHomePage(username: username),
               ),
             );
           } else if (role == 'admin') {

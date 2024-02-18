@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/admin_teacher_index.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Teacher/admin_teacher_index.dart';
 import 'package:http/http.dart' as http;
 
 class AddTeacherPage extends StatefulWidget {

@@ -7,7 +7,8 @@ import 'package:flutter_application_1/Roles/Admin/admin_home.dart';
 import 'package:flutter_application_1/Roles/Staff/staff_home.dart';
 import 'package:flutter_application_1/Roles/Teacher/teacher_home.dart';
 import 'package:flutter_application_1/Roles/student/student_home.dart';
-import 'Credentials/login.dart'; // Import the admin home page
+import 'Credentials/login.dart';
+import 'Modules/Librarian/librarian_home.dart'; // Import the admin home page
 
 void main() {
   runApp(
@@ -24,6 +25,7 @@ void main() {
             StudentHomePage(username: 'your_username'),
         '/teacher_home': (context) =>
             TeacherHomePage(username: 'your_username'),
+        '/staff_home': (context) => StaffHomePage(username: 'your_username'),
         '/admin_home': (context) => AdminHomePage(username: 'your_username'),
         '/librarian_home': (context) =>
             LibrarianHomePage(username: 'your_username'),

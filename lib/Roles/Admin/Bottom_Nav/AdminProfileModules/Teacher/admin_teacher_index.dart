@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/AddTeacherPage.dart';
-import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/AssignTeacherSubjectsPage.dart';
-import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/profile/teacher/ViewTeacherPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Teacher/AddTeacherPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Teacher/AssignTeacherSubjectsPage.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Teacher/ViewTeacherPage.dart';
 import '../../../admin_home.dart';
 import '../admin_profile.dart';
 
@@ -81,6 +81,34 @@ class AdminTeacher extends StatelessWidget {
                         AssignTeacherSubjectsPage(username: username),
                   ),
                 );
+              },
+            ),
+            ListTile(
+              title: Text('Teacher Leave'),
+              onTap: () {
+                // Navigator.pop(context); // Close the drawer
+                // // Navigator.push to AssignSubjectsPage.dart
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         AssignTeacherSubjectsPage(username: username),
+                //   ),
+                // );
+              },
+            ),
+            ListTile(
+              title: Text('Teacher Salary'),
+              onTap: () {
+                // Navigator.pop(context); // Close the drawer
+                // // Navigator.push to AssignSubjectsPage.dart
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         AssignTeacherSubjectsPage(username: username),
+                //   ),
+                // );
               },
             ),
             ListTile(

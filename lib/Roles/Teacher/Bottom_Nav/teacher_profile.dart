@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
-import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Course/StudentCoursesPage.dart';
-import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Exam/StudentExaminationPage.dart';
-import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/StudentPlacementPage.dart';
-import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/StudentResultPage.dart';
-import 'package:flutter_application_1/Roles/Student/SMS/student_index.dart';
 
 import '../../Common/Library/StudentLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
-import 'StudentProfileModules/Hostel/StudentHostelPage.dart';
 
-class StudentProfilePage extends StatelessWidget {
+class TeacherProfilePage extends StatelessWidget {
   final String username;
 
-  StudentProfilePage({required this.username});
+  TeacherProfilePage({required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -52,49 +45,49 @@ class StudentProfilePage extends StatelessWidget {
                     //   ),
                     // );
                   },
-                  child: buildSquare("Attendance", Icons.calendar_today),
+                  child: buildSquare("Salary", Icons.calendar_today),
                 ),
 
                 // Square 2 - Examination
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentExaminationPage(username: username),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         StudentExaminationPage(username: username),
+                    //   ),
+                    // );
                   },
-                  child: buildSquare("Examination", Icons.assignment),
+                  child: buildSquare("Exam", Icons.assignment),
                 ),
 
                 // Square 3 - Placement
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentPlacementPage(username: username),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         StudentPlacementPage(username: username),
+                    //   ),
+                    // );
                   },
-                  child: buildSquare("Placement", Icons.work),
+                  child: buildSquare("Notes", Icons.work),
                 ),
 
                 // Square 4 - Courses
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentCoursesPage(username: username),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         StudentCoursesPage(username: username),
+                    //   ),
+                    // );
                   },
-                  child: buildSquare("Notes", Icons.menu_book),
+                  child: buildSquare("Result", Icons.menu_book),
                 ),
               ],
             ),
@@ -116,49 +109,7 @@ class StudentProfilePage extends StatelessWidget {
                     //   ),
                     // );
                   },
-                  child: buildSquare("Fees", Icons.attach_money),
-                ),
-
-                // Square 6 - Result
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentResultPage(username: username),
-                      ),
-                    );
-                  },
-                  child: buildSquare("Result", Icons.poll),
-                ),
-
-                // Square 7 - Counselling
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentCounsellingPage(username: username),
-                      ),
-                    );
-                  },
-                  child: buildSquare("Counselling", Icons.group),
-                ),
-
-                // Square 8 - Feedback
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         StudentFeePage(username: username),
-                    //   ),
-                    // );
-                  },
-                  child: buildSquare("Feedback", Icons.feedback),
+                  child: buildSquare("Leave", Icons.attach_money),
                 ),
               ],
             ),
@@ -238,45 +189,6 @@ class StudentProfilePage extends StatelessWidget {
                     // );
                   },
                   child: buildRectangle("Health"),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 20),
-
-            // Fifth Row with two rectangles
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Rectangle 5 - Transport
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the TransportPage with the username
-                    // (You need to replace TransportPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => TransportPage(username: username),
-                    //   ),
-                    // );
-                  },
-                  child: buildRectangle("Transport"),
-                ),
-
-                // Rectangle 6 - Hostel
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the HostelPage with the username
-                    // (You need to replace HostelPage with the actual page class)
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentHostelPage(username: username),
-                      ),
-                    );
-                  },
-                  child: buildRectangle("Hostel"),
                 ),
               ],
             ),

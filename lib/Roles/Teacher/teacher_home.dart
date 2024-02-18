@@ -3,7 +3,8 @@ import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.d
 import '../../chat.dart';
 import '../../contact.dart';
 import '../../inbox.dart';
-import '../../Credentials/logout.dart'; // Import the LogoutDialog class
+import '../../Credentials/logout.dart';
+import 'Bottom_Nav/teacher_profile.dart'; // Import the LogoutDialog class
 
 class TeacherHomePage extends StatefulWidget {
   final String username;
@@ -61,7 +62,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               ],
             ),
           ),
-          StudentProfilePage(username: widget.username),
+          TeacherProfilePage(username: widget.username),
           InboxPage(
               username: widget.username), // Pass the username to the InboxPage
         ],
