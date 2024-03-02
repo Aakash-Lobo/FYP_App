@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
 
-import '../../Common/Library/StudentLibraryPage.dart';
+import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
 
 class StaffProfilePage extends StatelessWidget {
@@ -76,7 +76,7 @@ class StaffProfilePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            StudentLibraryPage(username: username),
+                            CommonLibraryPage(username: username),
                       ),
                     );
                   },

@@ -8,7 +8,7 @@ import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileMod
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/StudentResultPage.dart';
 import 'package:flutter_application_1/Roles/Student/SMS/student_index.dart';
 
-import '../../Common/Library/StudentLibraryPage.dart';
+import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
 import 'StudentProfileModules/Hostel/StudentHostelPage.dart';
 
@@ -178,7 +178,7 @@ class StudentProfilePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            StudentLibraryPage(username: username),
+                            CommonLibraryPage(username: username),
                       ),
                     );
                   },

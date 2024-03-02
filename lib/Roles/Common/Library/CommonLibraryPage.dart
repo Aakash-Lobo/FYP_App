@@ -4,16 +4,16 @@ import 'package:flutter_application_1/Roles/Student/student_home.dart';
 import 'BorrowBookPage.dart';
 import 'MyBookPage.dart';
 
-class StudentLibraryPage extends StatefulWidget {
+class CommonLibraryPage extends StatefulWidget {
   final String username;
 
-  StudentLibraryPage({required this.username});
+  CommonLibraryPage({required this.username});
 
   @override
-  _StudentLibraryPageState createState() => _StudentLibraryPageState();
+  _CommonLibraryPageState createState() => _CommonLibraryPageState();
 }
 
-class _StudentLibraryPageState extends State<StudentLibraryPage> {
+class _CommonLibraryPageState extends State<CommonLibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,18 +79,18 @@ class CustomSideNavigationBar extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            leading: Icon(Icons.library_books),
-            title: Text('Feedback Page'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BorrowBookPage(username: username),
-                ),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.library_books),
+          //   title: Text('Borrow Book'),
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => BorrowBookPage(username: username),
+          //       ),
+          //     );
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Exit'),
