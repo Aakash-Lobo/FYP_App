@@ -7,6 +7,7 @@ import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileMod
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/StudentPlacementPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/StudentResultPage.dart';
 import 'package:flutter_application_1/Roles/Student/SMS/student_index.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Fees/StudentFeesPage.dart';
 
 import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
@@ -108,13 +109,13 @@ class StudentProfilePage extends StatelessWidget {
                 // Square 5 - Fees
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         StudentFeePage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StudentFeesPage(username: username),
+                      ),
+                    );
                   },
                   child: buildSquare("Fees", Icons.attach_money),
                 ),

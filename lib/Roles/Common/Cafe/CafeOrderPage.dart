@@ -50,57 +50,47 @@ class _CafeOrderPageState extends State<CafeOrderPage> {
         title: Text('View Orders'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Orders Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Order Id')),
-                DataColumn(label: Text('Address')),
-                DataColumn(label: Text('Phone No')),
-                DataColumn(label: Text('Amount')),
-                DataColumn(label: Text('Payment Mode')),
-                DataColumn(label: Text('Order Date')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Items')),
-              ],
-              rows: filteredOrders.map((order) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(order['orderId'])),
-                    DataCell(Text(order['address'])),
-                    DataCell(Text(order['phoneNo'])),
-                    DataCell(Text(order['amount'])),
-                    DataCell(Text(order['paymentMode'])),
-                    DataCell(Text(order['orderDate'])),
-                    DataCell(
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle status button press
-                        },
-                        child: Text('View Status'),
-                      ),
-                    ),
-                    DataCell(
-                      ElevatedButton(
-                        onPressed: () {
-                          // Handle items button press
-                        },
-                        child: Text('View Items'),
-                      ),
-                    ),
-                  ],
-                );
-              }).toList(),
-            ),
+        scrollDirection: Axis.horizontal, // Only horizontal scrolling
+        child: DataTable(
+          columnSpacing: 16, // Adjust spacing between columns
+          columns: [
+            DataColumn(label: Text('Order Id')),
+            DataColumn(label: Text('Address')),
+            DataColumn(label: Text('Phone No')),
+            DataColumn(label: Text('Amount')),
+            DataColumn(label: Text('Payment Mode')),
+            DataColumn(label: Text('Order Date')),
+            DataColumn(label: Text('Status')),
+            DataColumn(label: Text('Items')),
           ],
+          rows: filteredOrders.map((order) {
+            return DataRow(
+              cells: [
+                DataCell(Text(order['orderId'])),
+                DataCell(Text(order['address'])),
+                DataCell(Text(order['phoneNo'])),
+                DataCell(Text(order['amount'])),
+                DataCell(Text(order['paymentMode'])),
+                DataCell(Text(order['orderDate'])),
+                DataCell(
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle status button press
+                    },
+                    child: Text('View Status'),
+                  ),
+                ),
+                DataCell(
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle items button press
+                    },
+                    child: Text('View Items'),
+                  ),
+                ),
+              ],
+            );
+          }).toList(),
         ),
       ),
     );
