@@ -108,18 +108,6 @@ class CustomSideNavigationBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.assignment_returned_outlined),
-            title: Text('Add Examinee'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddExamineePage(username: username),
-                ),
-              );
-            },
-          ),
-          ListTile(
             leading: Icon(Icons.people),
             title: Text('Ranking'),
             onTap: () {

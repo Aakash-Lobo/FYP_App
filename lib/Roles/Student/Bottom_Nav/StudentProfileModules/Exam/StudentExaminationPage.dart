@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/Roles/Student/student_home.dart';
 
 import 'AttemptedExamPage.dart';
@@ -14,23 +16,53 @@ class StudentExaminationPage extends StatefulWidget {
 }
 
 class _StudentExaminationPageState extends State<StudentExaminationPage> {
+  Future<List<Map<String, dynamic>>> fetchAllExams() async {
+    final response = await http.get(
+      Uri.parse(
+          'http://localhost/fyp/app/student/Bottom/exam/get_all_exams.php?roll_no=${widget.username}'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return List<Map<String, dynamic>>.from(data);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Exam Page'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Welcome, ${widget.username}!',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            // Add librarian home page content here
-          ],
-        ),
+      body: FutureBuilder(
+        future: fetchAllExams(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final exam = snapshot.data![index];
+                return ListTile(
+                  title: Text(exam['ex_title']),
+                  subtitle: Text(exam['ex_description']),
+                  trailing: ElevatedButton(
+                    onPressed: () {
+                      // Implement action when the button is pressed
+                    },
+                    child: Text('Start Now'),
+                  ),
+                );
+              },
+            );
+          }
+        },
       ),
       drawer: CustomSideNavigationBar(
         username: widget.username,

@@ -142,63 +142,65 @@ class CustomSideNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      StudentPlacementPage(username: username),
+      child: Expanded(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        StudentPlacementPage(username: username),
+                  ),
+                );
+              },
+              child: UserAccountsDrawerHeader(
+                accountName: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Your Name'),
+                    Text('View Profile', style: TextStyle(fontSize: 16)),
+                  ],
                 ),
-              );
-            },
-            child: UserAccountsDrawerHeader(
-              accountName: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Your Name'),
-                  Text('View Profile', style: TextStyle(fontSize: 16)),
-                ],
+                accountEmail: Text(username),
+                currentAccountPicture: CircleAvatar(),
               ),
-              accountEmail: Text(username),
-              currentAccountPicture: CircleAvatar(),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.contacts),
-            title: Text('Applied'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AppliedJobPage(username: username),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Notification'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => JobNotiPage(username: username),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Exit'),
-            onTap: () {
-              _showExitConfirmationDialog(context);
-            },
-          ),
-        ],
+            ListTile(
+              leading: Icon(Icons.contacts),
+              title: Text('Applied'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AppliedJobPage(username: username),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Notification'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => JobNotiPage(username: username),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Exit'),
+              onTap: () {
+                _showExitConfirmationDialog(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

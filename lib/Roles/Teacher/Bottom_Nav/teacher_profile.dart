@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
+import 'package:flutter_application_1/Roles/Common/Health/CommonHealthPage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Attendance/AttendanceStudentPage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Course/TeacherCoursePage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Leave/TeacherLeavePage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Result/TeacherResultPage.dart';
 
 import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
@@ -79,13 +84,13 @@ class TeacherProfilePage extends StatelessWidget {
                 // Square 4 - Courses
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         StudentCoursesPage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            TeacherResultPage(username: username),
+                      ),
+                    );
                   },
                   child: buildSquare("Result", Icons.menu_book),
                 ),
@@ -101,15 +106,41 @@ class TeacherProfilePage extends StatelessWidget {
                 // Square 5 - Fees
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         StudentFeePage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            TeacherLeavePage(username: username),
+                      ),
+                    );
                   },
                   child: buildSquare("Leave", Icons.attach_money),
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            AttendanceStudentPage(username: username),
+                      ),
+                    );
+                  },
+                  child: buildSquare("Attendance", Icons.menu_book),
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            TeacherCoursePage(username: username),
+                      ),
+                    );
+                  },
+                  child: buildSquare("Course", Icons.menu_book),
                 ),
               ],
             ),
@@ -181,12 +212,13 @@ class TeacherProfilePage extends StatelessWidget {
                   onTap: () {
                     // Navigate to the HealthPage with the username
                     // (You need to replace HealthPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => HealthPage(username: username),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            CommonHealthPage(username: username),
+                      ),
+                    );
                   },
                   child: buildRectangle("Health"),
                 ),

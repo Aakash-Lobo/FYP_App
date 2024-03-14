@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Roles/Common/Health/AppointmentHistoryPage.dart';
-import 'package:flutter_application_1/Roles/Common/Health/PrescriptionPage.dart';
+import 'package:flutter_application_1/Credentials/logout.dart';
+import 'package:flutter_application_1/Modules/Doctor/ViewAppointment.dart';
+import 'package:flutter_application_1/Modules/Doctor/ViewPrescribe.dart';
 
-class CommonHealthPage extends StatefulWidget {
+class DoctorHomePage extends StatefulWidget {
   final String username;
 
-  CommonHealthPage({required this.username});
+  DoctorHomePage({required this.username});
 
   @override
-  _CommonHealthPageState createState() => _CommonHealthPageState();
+  _DoctorHomePageState createState() => _DoctorHomePageState();
 }
 
-class _CommonHealthPageState extends State<CommonHealthPage> {
+class _DoctorHomePageState extends State<DoctorHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Health Page'),
+        title: Text('Doctor Home Page'),
       ),
       body: Center(
         child: Column(
@@ -67,64 +68,42 @@ class CustomSideNavigationBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.library_books),
-            title: Text('Appointment History'),
+            title: Text('View Appointment'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      AppointmentHistoryPage(username: username),
+                  builder: (context) => ViewAppointmentPage(username: username),
                 ),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.library_books),
-            title: Text('Prescription'),
+            leading: Icon(Icons.add),
+            title: Text('Prescribe List'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PrescriptionPage(username: username),
+                  builder: (context) => ViewPrescribePage(username: username),
                 ),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Exit'),
+            leading: Icon(Icons.logout),
+            title: Text('Logout'),
             onTap: () {
-              _showExitConfirmationDialog(context);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return LogoutDialog(onLogout: onLogout);
+                },
+              );
             },
           ),
         ],
       ),
-    );
-  }
-
-  void _showExitConfirmationDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Exit Confirmation'),
-          content: Text('Are you sure you want to exit?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('No'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Yes'),
-            ),
-          ],
-        );
-      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
+import 'package:flutter_application_1/Roles/Common/Health/CommonHealthPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Course/StudentCoursesPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Exam/StudentExaminationPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/StudentPlacementPage.dart';
@@ -230,13 +231,14 @@ class StudentProfilePage extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     // Navigate to the HealthPage with the username
-                    // (You need to replace HealthPage with the actual page class)
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => HealthPage(username: username),
-                    //   ),
-                    // );
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            CommonHealthPage(username: username),
+                      ),
+                    );
                   },
                   child: buildRectangle("Health"),
                 ),

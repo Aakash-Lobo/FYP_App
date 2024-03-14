@@ -2,26 +2,26 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class TeacherResultPage extends StatefulWidget {
+class AttendanceStudentPage extends StatefulWidget {
   final String username;
 
-  TeacherResultPage({required this.username});
+  AttendanceStudentPage({required this.username});
 
   @override
-  _TeacherResultPageState createState() => _TeacherResultPageState();
+  _AttendanceStudentPageState createState() => _AttendanceStudentPageState();
 }
 
-class _TeacherResultPageState extends State<TeacherResultPage> {
-  final TextEditingController courseCodeController = TextEditingController();
+class _AttendanceStudentPageState extends State<AttendanceStudentPage> {
+  final TextEditingController courseController = TextEditingController();
   final TextEditingController semesterController = TextEditingController();
-  final TextEditingController subjectCodeController = TextEditingController();
-  List<Map<String, dynamic>> studentsData = [];
+  final TextEditingController subjectController = TextEditingController();
+  List<Map<String, dynamic>> studentData = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Class Result'),
+        title: Text('Student Attendance'),
       ),
       body: Padding(
         padding: EdgeInsets.all(8.0),
@@ -32,7 +32,7 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
               children: [
                 Expanded(
                   child: TextFormField(
-                    controller: courseCodeController,
+                    controller: courseController,
                     decoration: InputDecoration(labelText: 'Enter Class Id'),
                   ),
                 ),
@@ -46,7 +46,7 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
                 SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
-                    controller: subjectCodeController,
+                    controller: subjectController,
                     decoration: InputDecoration(labelText: 'Enter Subject'),
                   ),
                 ),
@@ -60,9 +60,9 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: studentsData.length,
+                itemCount: studentData.length,
                 itemBuilder: (context, index) {
-                  final student = studentsData[index];
+                  final student = studentData[index];
                   return Card(
                     child: ListTile(
                       title: Text('Roll No: ${student['roll_no']}'),
@@ -74,14 +74,29 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
                           Text('Semester: ${student['semester']}'),
                           Text(
                               'Student Name: ${student['first_name']} ${student['middle_name']} ${student['last_name']}'),
-                          Text('Total Marks: 100'),
-                          TextFormField(
-                            decoration:
-                                InputDecoration(labelText: 'Obtain Marks'),
-                            onChanged: (value) {
-                              studentsData[index]['obtain_marks'] =
-                                  int.tryParse(value) ?? 0;
-                            },
+                          Row(
+                            children: [
+                              Text('Present'),
+                              Checkbox(
+                                value: student['attendance'] == 1,
+                                onChanged: (value) {
+                                  setState(() {
+                                    student['attendance'] =
+                                        value != null && value ? 1 : 0;
+                                  });
+                                },
+                              ),
+                              Text('Absent'),
+                              Checkbox(
+                                value: student['attendance'] == 0,
+                                onChanged: (value) {
+                                  setState(() {
+                                    student['attendance'] =
+                                        value != null && value ? 1 : 0;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -91,8 +106,8 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
               ),
             ),
             ElevatedButton(
-              onPressed: _submitClassResult,
-              child: Text('Submit Class Result'),
+              onPressed: _submitAttendance,
+              child: Text('Submit Attendance'),
             ),
           ],
         ),
@@ -101,23 +116,19 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
   }
 
   Future<void> _fetchStudentData() async {
-    String courseCode = courseCodeController.text;
-    String semester = semesterController.text;
-    String subjectCode = subjectCodeController.text;
-
-    var response = await http.post(
+    final response = await http.post(
       Uri.parse(
-          'http://localhost/fyp/app/teacher/Bottom/course/viewcourse.php'),
+          'http://localhost/fyp/app/teacher/Bottom/attendance/viewattend.php'),
       body: {
-        'course_code': courseCode,
-        'semester': semester,
-        'subject_code': subjectCode,
+        'course_code': courseController.text,
+        'semester': semesterController.text,
+        'subject_code': subjectController.text,
       },
     );
 
     if (response.statusCode == 200) {
       setState(() {
-        studentsData =
+        studentData =
             List<Map<String, dynamic>>.from(json.decode(response.body));
       });
     } else {
@@ -125,11 +136,19 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
     }
   }
 
-  Future<void> _submitClassResult() async {
-    var response = await http.post(
+  Future<void> _submitAttendance() async {
+    final List<Map<String, dynamic>> attendanceList =
+        studentData.map((student) {
+      return {
+        'roll_no': student['roll_no'],
+        'attendance': student['attendance'],
+      };
+    }).toList();
+
+    final response = await http.post(
       Uri.parse(
-          'http://localhost/fyp/app/teacher/Bottom/course/submitresult.php'),
-      body: json.encode(studentsData),
+          'http://localhost/fyp/app/teacher/Bottom/attendance/submitattend.php'),
+      body: json.encode(attendanceList),
       headers: {'Content-Type': 'application/json'},
     );
 
@@ -137,15 +156,15 @@ class _TeacherResultPageState extends State<TeacherResultPage> {
       final responseData = json.decode(response.body);
       if (responseData['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Class result submitted successfully')),
+          SnackBar(content: Text('Attendance submitted successfully')),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to submit class result')),
+          SnackBar(content: Text('Failed to submit attendance')),
         );
       }
     } else {
-      print('Failed to submit class result');
+      print('Failed to submit attendance');
     }
   }
 }

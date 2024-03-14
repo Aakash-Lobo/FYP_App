@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
+import 'package:flutter_application_1/Roles/Staff/Bottom_Nav/StaffProfileModules/Leave/StaffLeavePage.dart';
 
 import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
@@ -49,13 +50,12 @@ class StaffProfilePage extends StatelessWidget {
               // Square 2 - Examination
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) =>
-                  //         StudentExaminationPage(username: username),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StaffLeavePage(username: username),
+                    ),
+                  );
                 },
                 child: buildSquare("Leave", Icons.assignment),
               ),
