@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
-import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
+import 'package:flutter_application_1/Roles/Common/Counselling/CommonCounselPage.dart';
 import 'package:flutter_application_1/Roles/Common/Health/CommonHealthPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Course/StudentCoursesPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Exam/StudentExaminationPage.dart';
@@ -142,7 +142,7 @@ class StudentProfilePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            StudentCounsellingPage(username: username),
+                            CommonCounselPage(username: username),
                       ),
                     );
                   },

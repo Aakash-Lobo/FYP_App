@@ -4,16 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/Roles/Common/Health/AppointmentHistoryPage.dart';
 import 'package:flutter_application_1/Roles/Common/Health/PrescriptionPage.dart';
 
-class CommonHealthPage extends StatefulWidget {
+class CommonCounselPage extends StatefulWidget {
   final String username;
 
-  CommonHealthPage({required this.username});
+  CommonCounselPage({required this.username});
 
   @override
-  _CommonHealthPageState createState() => _CommonHealthPageState();
+  _CommonCounselPageState createState() => _CommonCounselPageState();
 }
 
-class _CommonHealthPageState extends State<CommonHealthPage> {
+class _CommonCounselPageState extends State<CommonCounselPage> {
   String _selectedDoctor = '';
   List<Map<String, dynamic>> _doctors = [];
 

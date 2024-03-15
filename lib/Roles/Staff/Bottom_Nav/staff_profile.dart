@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
-import 'package:flutter_application_1/Roles/Common/Counselling/StudentCounsellingPage.dart';
+import 'package:flutter_application_1/Roles/Common/Counselling/CommonCounselPage.dart';
 import 'package:flutter_application_1/Roles/Staff/Bottom_Nav/StaffProfileModules/Leave/StaffLeavePage.dart';
 
 import '../../Common/Library/CommonLibraryPage.dart';
