@@ -74,48 +74,57 @@ class _ViewRankingPageState extends State<ViewRankingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ranking'),
+        title: Text(
+          'Ranking',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Ranking',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Examinee')),
-                DataColumn(label: Text('Score / Over')),
-                DataColumn(label: Text('Percentage')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: rankingData.map((ranking) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(ranking['exmne_fullname'] ?? 'N/A')),
-                    DataCell(Text(
-                        '${ranking['score'] ?? 'N/A'} / ${ranking['over'] ?? 'N/A'}')),
-                    DataCell(Text('${ranking['percentage'] ?? 'N/A'}%')),
-                    DataCell(
-                      ElevatedButton(
-                        onPressed: () {
-                          _navigateToDetailedView(
-                            ranking['exmne_fullname'],
-                            '${ranking['score']} / ${ranking['over']}',
-                            '${ranking['percentage']}',
-                          );
-                        },
-                        child: Text('View'),
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: rankingData.length,
+              itemBuilder: (BuildContext context, int index) {
+                var ranking = rankingData[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      ranking['exmne_fullname'] ?? 'N/A',
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Score / Over: ${ranking['score'] ?? 'N/A'} / ${ranking['over'] ?? 'N/A'}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Percentage: ${ranking['percentage'] ?? 'N/A'}%',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        _navigateToDetailedView(
+                          ranking['exmne_fullname'],
+                          '${ranking['score']} / ${ranking['over']}',
+                          '${ranking['percentage']}',
+                        );
+                      },
+                      child:
+                          Text('View', style: TextStyle(fontFamily: 'Raleway')),
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

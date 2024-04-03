@@ -179,78 +179,74 @@ class _ViewPlacementCategoryPageState extends State<ViewPlacementCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Category Page'),
+        title: Text(
+          'Category Page',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Categories',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Category')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: categoriesData.map((category) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(category['CATEGORY'])),
-                    DataCell(
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Show confirmation dialog
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Category'),
-                                    content: Text(
-                                        'Are you sure you want to delete this category?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('No'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Perform the delete
-                                          deleteCategory(
-                                              category['CATEGORYID']);
-                                          Navigator.of(context)
-                                              .pop(); // Close the confirmation dialog
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text('Delete'),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showUpdateModal(category);
-                            },
-                            child: Text('Update'),
-                          ),
-                        ],
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: categoriesData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      categoriesData[index]['CATEGORY'],
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Delete Category'),
+                                  content: Text(
+                                      'Are you sure you want to delete this category?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deleteCategory(categoriesData[index]
+                                            ['CATEGORYID']);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            _showUpdateModal(categoriesData[index]);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

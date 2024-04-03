@@ -42,25 +42,41 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Order'),
+        title: Text(
+          'View Order',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: _orders.length,
         itemBuilder: (context, index) {
           final order = _orders[index];
           return Card(
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            elevation: 4.0,
             child: ListTile(
-              title: Text('Order ID: ${order['orderId']}'),
+              title: Text(
+                'Order ID: ${order['orderId']}',
+                style: TextStyle(fontFamily: 'Raleway'),
+              ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('User ID: ${order['userId']}'),
-                  Text('Address: ${order['address']}'),
-                  Text('Phone No: ${order['phoneNo']}'),
-                  Text('Amount: ${order['amount']}'),
-                  Text('Payment Mode: ${order['paymentMode']}'),
-                  Text('Order Date: ${order['orderDate']}'),
-                  Text('Order Status: ${order['orderStatus']}'),
+                  Text('User ID: ${order['userId']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Address: ${order['address']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Phone No: ${order['phoneNo']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Amount: ${order['amount']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Payment Mode: ${order['paymentMode']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Order Date: ${order['orderDate']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Order Status: ${order['orderStatus']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
                 ],
               ),
               onTap: () {

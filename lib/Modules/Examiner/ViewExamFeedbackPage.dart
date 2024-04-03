@@ -45,34 +45,46 @@ class _ViewExamFeedbackPageState extends State<ViewExamFeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feedback'),
+        title: Text(
+          'Feedback',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Feedback',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Examinee')),
-                DataColumn(label: Text('Feedbacks')),
-                DataColumn(label: Text('Date')),
-              ],
-              rows: feedbackData.map((feedback) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(feedback['fb_exmne_as'] ?? 'N/A')),
-                    DataCell(Text(feedback['fb_feedbacks'] ?? 'N/A')),
-                    DataCell(Text(feedback['fb_date'] ?? 'N/A')),
-                  ],
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: feedbackData.length,
+              itemBuilder: (BuildContext context, int index) {
+                var feedback = feedbackData[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      feedback['fb_exmne_as'] ?? 'N/A',
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Feedbacks: ${feedback['fb_feedbacks'] ?? 'N/A'}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Date: ${feedback['fb_date'] ?? 'N/A'}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

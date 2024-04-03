@@ -44,7 +44,11 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fees Page'),
+        title: Text(
+          'Fees Page',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: feeDetails.isEmpty
@@ -53,19 +57,44 @@ class _StudentFeesPageState extends State<StudentFeesPage> {
                 itemCount: feeDetails.length,
                 itemBuilder: (context, index) {
                   final feeDetail = feeDetails[index];
-                  return ListTile(
-                    title: Text('Voucher No.: ${feeDetail['fee_voucher']}'),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Roll No.: ${feeDetail['roll_no']}'),
-                        Text(
-                            'Student Name: ${feeDetail['first_name']} ${feeDetail['middle_name']} ${feeDetail['last_name']}'),
-                        Text('Program: ${feeDetail['course_code']}'),
-                        Text('Amount (Rs.): ${feeDetail['amount']}'),
-                        Text('Posting Date: ${feeDetail['posting_date']}'),
-                        Text('Status: ${feeDetail['status']}'),
-                      ],
+                  return Card(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    elevation: 4.0,
+                    child: ListTile(
+                      title: Text(
+                        'Voucher No.: ${feeDetail['fee_voucher']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Roll No.: ${feeDetail['roll_no']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Student Name: ${feeDetail['first_name']} ${feeDetail['middle_name']} ${feeDetail['last_name']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Program: ${feeDetail['course_code']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Amount (Rs.): ${feeDetail['amount']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Posting Date: ${feeDetail['posting_date']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Status: ${feeDetail['status']}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

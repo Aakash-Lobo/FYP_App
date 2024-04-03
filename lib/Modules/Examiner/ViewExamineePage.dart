@@ -196,84 +196,101 @@ class _ViewExamineePageState extends State<ViewExamineePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Examinee Details'),
+        title: Text(
+          'Examinee Details',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Examinee Details',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Fullname')),
-                DataColumn(label: Text('Gender')),
-                DataColumn(label: Text('DOB')),
-                DataColumn(label: Text('Subject')),
-                DataColumn(label: Text('Year')),
-                DataColumn(label: Text('Email')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: examineesData.map((examinee) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(examinee['first_name'] ?? '')),
-                    DataCell(Text(examinee['gender'] ?? '')),
-                    DataCell(Text(examinee['dob'] ?? '')),
-                    DataCell(Text(examinee['course_code'] ?? '')),
-                    DataCell(Text(examinee['semester'] ?? '')),
-                    DataCell(Text(examinee['email'] ?? '')),
-                    DataCell(
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Examinee'),
-                                    content: Text(
-                                        'Are you sure you want to delete this examinee?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('No'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          deleteExaminee(examinee['exmne_id']);
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text('Delete'),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showUpdateModal(context, examinee);
-                            },
-                            child: Text('Update'),
-                          ),
-                        ],
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: examineesData.length,
+              itemBuilder: (BuildContext context, int index) {
+                var examinee = examineesData[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      examinee['first_name'] ?? '',
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Gender: ${examinee['gender'] ?? ''}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'DOB: ${examinee['dob'] ?? ''}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Subject: ${examinee['course_code'] ?? ''}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Year: ${examinee['semester'] ?? ''}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Email: ${examinee['email'] ?? ''}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Show confirmation dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Delete Examinee'),
+                                  content: Text(
+                                      'Are you sure you want to delete this examinee?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deleteExaminee(examinee['exmne_id']);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Text('Delete'),
+                        ),
+                        SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                            _showUpdateModal(context, examinee);
+                          },
+                          child: Text('Update'),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

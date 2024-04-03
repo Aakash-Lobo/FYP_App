@@ -93,93 +93,134 @@ class _BorrowedBooksPageState extends State<BorrowedBooksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Borrowed Books'),
+        title: Text(
+          'Borrowed Books',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Borrowed Books Page',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
             // Date Filters
             Row(
               children: [
-                Text('From:'),
+                Text('From:',
+                    style: TextStyle(
+                        fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
                 SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2101),
-                    );
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime(2101),
+                      );
 
-                    if (picked != null && picked != DateTime.now()) {
-                      setState(() {
-                        dateFrom = DateFormat('yyyy-MM-dd').format(picked!);
-                      });
-                    }
+                      if (picked != null && picked != DateTime.now()) {
+                        setState(() {
+                          dateFrom = DateFormat('yyyy-MM-dd').format(picked!);
+                        });
+                      }
 
-                    updateDateFilters();
-                  },
-                  child: Text('Select Date'),
+                      updateDateFilters();
+                    },
+                    child: Text('Select Date'),
+                  ),
                 ),
                 SizedBox(width: 16),
-                Text('To:'),
+                Text('To:',
+                    style: TextStyle(
+                        fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
                 SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () async {
-                    final DateTime? picked = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2101),
-                    );
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime(2101),
+                      );
 
-                    if (picked != null) {
-                      setState(() {
-                        dateTo = DateFormat('yyyy-MM-dd').format(picked!);
-                      });
-                    }
+                      if (picked != null) {
+                        setState(() {
+                          dateTo = DateFormat('yyyy-MM-dd').format(picked!);
+                        });
+                      }
 
-                    updateDateFilters();
-                  },
-                  child: Text('Select Date'),
+                      updateDateFilters();
+                    },
+                    child: Text('Select Date'),
+                  ),
                 ),
               ],
             ),
             SizedBox(height: 20),
             // Display Borrowed Books
             Expanded(
-              child: DataTable(
-                columns: [
-                  DataColumn(label: Text('Barcode')),
-                  DataColumn(label: Text('Borrower')),
-                  DataColumn(label: Text('Title')),
-                  DataColumn(label: Text('Date Borrowed')),
-                  DataColumn(label: Text('Due Date')),
-                  DataColumn(label: Text('Date Returned')),
-                  DataColumn(label: Text('Status')),
-                ],
-                rows: borrowedBooks.map((book) {
-                  return DataRow(
-                    cells: [
-                      DataCell(Text(book.bookBarcode ?? 'Unknown Barcode')),
-                      DataCell(Text(book.borrowerName ?? 'Unknown Borrower')),
-                      DataCell(Text(book.bookTitle ?? 'Unknown Title')),
-                      DataCell(
-                          Text(book.dateBorrowed ?? 'Unknown Date Borrowed')),
-                      DataCell(Text(book.dueDate ?? 'Unknown Due Date')),
-                      DataCell(Text(book.dateReturned ?? 'Not Returned')),
-                      DataCell(Text(book.status ?? 'Unknown Status')),
-                    ],
+              child: ListView.builder(
+                itemCount: borrowedBooks.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    elevation: 3,
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Barcode: ${borrowedBooks[index].bookBarcode ?? 'Unknown Barcode'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Borrower: ${borrowedBooks[index].borrowerName ?? 'Unknown Borrower'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Title: ${borrowedBooks[index].bookTitle ?? 'Unknown Title'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Date Borrowed: ${borrowedBooks[index].dateBorrowed ?? 'Unknown Date Borrowed'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Due Date: ${borrowedBooks[index].dueDate ?? 'Unknown Due Date'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Date Returned: ${borrowedBooks[index].dateReturned ?? 'Not Returned'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Status: ${borrowedBooks[index].status ?? 'Unknown Status'}',
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
-                }).toList(),
+                },
               ),
             ),
           ],

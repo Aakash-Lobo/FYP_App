@@ -75,94 +75,101 @@ class _ViewRoomPageState extends State<ViewRoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Rooms'),
+        title: Text(
+          'View Rooms',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Rooms',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Room No.')),
-                DataColumn(label: Text('Seater')),
-                DataColumn(label: Text('Fees Per Month')),
-                DataColumn(label: Text('Actions')),
-              ],
-              rows: roomsData.map((room) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(room['room_no'].toString())),
-                    DataCell(Text(room['seater'].toString())),
-                    DataCell(Text('\$${room['fees']}')),
-                    DataCell(
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Show edit page for the room
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditRoomPage(
-                                    roomId: int.parse(room['id'].toString()),
-                                    roomNo: room['room_no'].toString(),
-                                    seater: room['seater'].toString(),
-                                    fees: room['fees'].toString(),
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Text('Edit'),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Show confirmation dialog
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Room'),
-                                    content: Text(
-                                      'Are you sure you want to delete this room?',
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('No'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Perform the delete
-                                          deleteRoom(
-                                              int.parse(room['id'].toString()));
-                                          Navigator.of(context)
-                                              .pop(); // Close the confirmation dialog
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text('Delete'),
-                          ),
-                        ],
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: roomsData.length,
+              itemBuilder: (BuildContext context, int index) {
+                var room = roomsData[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      room['room_no'].toString(),
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Seater: ${room['seater']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Fees Per Month: \$${room['fees']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            // Show edit page for the room
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditRoomPage(
+                                  roomId: int.parse(room['id'].toString()),
+                                  roomNo: room['room_no'].toString(),
+                                  seater: room['seater'].toString(),
+                                  fees: room['fees'].toString(),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            // Show confirmation dialog
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Delete Room'),
+                                  content: Text(
+                                      'Are you sure you want to delete this room?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        // Perform the delete
+                                        deleteRoom(
+                                            int.parse(room['id'].toString()));
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

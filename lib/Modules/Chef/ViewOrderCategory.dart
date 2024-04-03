@@ -42,45 +42,79 @@ class _ViewOrderCategoryPageState extends State<ViewOrderCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Category'),
+        title: Text(
+          'View Category',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: _categories.length,
         itemBuilder: (context, index) {
           final category = _categories[index];
           return Card(
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            elevation: 4.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Id: ${category['categoryId']}'),
-                Image.network(
-                  'http://example.com/${category['categoryId']}.jpg',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
+                Text(
+                  'Id: ${category['categoryId']}',
+                  style: TextStyle(fontFamily: 'Raleway'),
                 ),
-                Text('Category Detail:'),
+                SizedBox(height: 8.0),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    'http://localhost/fyp/app/modules/cafe/Images/pizza-' +
+                        '${category['categorieId']}.jpg',
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Name: ${category['categoryName']}'),
-                      Text('Description: ${category['categoryDesc']}'),
+                      Text(
+                        'Category Detail:',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Name: ${category['categoryName']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      Text(
+                        'Description: ${category['categoryDesc']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  child: Text('Edit'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  child: Text('Delete'),
+                ButtonBar(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle edit button press
+                      },
+                      child: Text(
+                        'Edit',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle delete button press
+                      },
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

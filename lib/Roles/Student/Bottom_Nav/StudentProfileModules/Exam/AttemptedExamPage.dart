@@ -32,7 +32,11 @@ class _AttemptedExamPageState extends State<AttemptedExamPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Attempted Exams'),
+        title: Text(
+          'Attempted Exams',
+          style: TextStyle(fontFamily: 'Raleway'),
+        ),
+        centerTitle: true,
       ),
       body: FutureBuilder(
         future: fetchAttemptedExams(),
@@ -46,19 +50,33 @@ class _AttemptedExamPageState extends State<AttemptedExamPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final exam = snapshot.data![index];
-                return ListTile(
-                  title: Text(exam['exam_title']),
-                  subtitle: Text(exam['exam_description']),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ExamResultPage(examData: exam),
-                        ),
-                      );
-                    },
-                    child: Text('View Result'),
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      exam['exam_title'],
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                    subtitle: Text(
+                      exam['exam_description'],
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ExamResultPage(examData: exam),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'View Result',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
                   ),
                 );
               },

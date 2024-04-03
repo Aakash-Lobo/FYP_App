@@ -119,18 +119,7 @@ class CustomSideNavigationBar extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            leading: Icon(Icons.people),
-            title: Text('Users'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LibrarianUsersPage(username: username),
-                ),
-              );
-            },
-          ),
+
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),

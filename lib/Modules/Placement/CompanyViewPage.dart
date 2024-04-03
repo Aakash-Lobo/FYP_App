@@ -186,81 +186,88 @@ class _ViewCompanyPageState extends State<ViewCompanyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Company Page'),
+        title: Text(
+          'Company Page',
+          style: TextStyle(fontFamily: 'Raleway'),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Companies',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Address')),
-                DataColumn(label: Text('Contact No.')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: companiesData.map((company) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(company['COMPANYNAME'])),
-                    DataCell(Text(company['COMPANYADDRESS'])),
-                    DataCell(Text(company['COMPANYCONTACTNO'])),
-                    DataCell(
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Show confirmation dialog
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Company'),
-                                    content: Text(
-                                        'Are you sure you want to delete this company?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('No'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Perform the delete
-                                          deleteCompany(company['COMPANYID']);
-                                          Navigator.of(context)
-                                              .pop(); // Close the confirmation dialog
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text('Delete'),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showUpdateModal(company);
-                            },
-                            child: Text('Update'),
-                          ),
-                        ],
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: companiesData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    leading: Icon(Icons.business),
+                    title: Text(
+                      companiesData[index]['COMPANYNAME'],
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Address: ${companiesData[index]['COMPANYADDRESS']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Contact No.: ${companiesData[index]['COMPANYCONTACTNO']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Delete Company'),
+                                  content: Text(
+                                      'Are you sure you want to delete this company?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deleteCompany(
+                                            companiesData[index]['COMPANYID']);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            _showUpdateModal(companiesData[index]);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

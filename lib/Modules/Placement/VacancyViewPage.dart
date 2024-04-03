@@ -158,90 +158,110 @@ class _ViewVacancyPageState extends State<ViewVacancyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Job Vacancies'),
+        title: Text(
+          'Job Vacancies',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Job Vacancies',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Company Name')),
-                DataColumn(label: Text('Occupation Title')),
-                DataColumn(label: Text('Required Employees')),
-                DataColumn(label: Text('Salaries')),
-                DataColumn(label: Text('Duration of Employment')),
-                DataColumn(label: Text('Qualification/Experience')),
-                DataColumn(label: Text('Job Description')),
-                DataColumn(label: Text('Preferred Sex')),
-                DataColumn(label: Text('Sector of Vacancy')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: jobsData.map((job) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(job['COMPANYNAME'])),
-                    DataCell(Text(job['OCCUPATIONTITLE'])),
-                    DataCell(Text(job['REQ_NO_EMPLOYEES'])),
-                    DataCell(Text(job['SALARIES'])),
-                    DataCell(Text(job['DURATION_EMPLOYEMENT'])),
-                    DataCell(Text(job['QUALIFICATION_WORKEXPERIENCE'])),
-                    DataCell(Text(job['JOBDESCRIPTION'])),
-                    DataCell(Text(job['PREFEREDSEX'])),
-                    DataCell(Text(job['SECTOR_VACANCY'])),
-                    DataCell(
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Delete Job'),
-                                    content: Text(
-                                        'Are you sure you want to delete this job?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('No'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          deleteJob(job['JOBID']);
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Yes'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            child: Text('Delete'),
-                          ),
-                          SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              _showUpdateModal(context, job);
-                            },
-                            child: Text('Update'),
-                          ),
-                        ],
-                      ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: jobsData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      jobsData[index]['COMPANYNAME'],
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                  ],
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Occupation Title: ${jobsData[index]['OCCUPATIONTITLE']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Required Employees: ${jobsData[index]['REQ_NO_EMPLOYEES']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Salaries: ${jobsData[index]['SALARIES']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Duration of Employment: ${jobsData[index]['DURATION_EMPLOYEMENT']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Qualification/Experience: ${jobsData[index]['QUALIFICATION_WORKEXPERIENCE']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Job Description: ${jobsData[index]['JOBDESCRIPTION']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Preferred Sex: ${jobsData[index]['PREFEREDSEX']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                        Text(
+                          'Sector of Vacancy: ${jobsData[index]['SECTOR_VACANCY']}',
+                          style: TextStyle(fontFamily: 'Raleway'),
+                        ),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Delete Job'),
+                                  content: Text(
+                                      'Are you sure you want to delete this job?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        deleteJob(jobsData[index]['JOBID']);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            _showUpdateModal(context, jobsData[index]);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

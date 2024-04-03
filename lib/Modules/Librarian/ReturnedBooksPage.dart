@@ -37,6 +37,7 @@ class ReturnedBook {
 
 class ReturnedBooksPage extends StatefulWidget {
   final String username;
+
   ReturnedBooksPage({required this.username});
 
   @override
@@ -92,22 +93,21 @@ class _ReturnedBooksPageState extends State<ReturnedBooksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Returned Books'),
+        title: Text(
+          'Returned Books',
+          style: TextStyle(fontFamily: 'Raleway'),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Returned Books Page',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
             // Date Filters
             Row(
               children: [
-                Text('From:'),
+                Text('From:', style: TextStyle(fontFamily: 'Raleway')),
                 SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () async {
@@ -129,7 +129,7 @@ class _ReturnedBooksPageState extends State<ReturnedBooksPage> {
                   child: Text('Select Date'),
                 ),
                 SizedBox(width: 16),
-                Text('To:'),
+                Text('To:', style: TextStyle(fontFamily: 'Raleway')),
                 SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () async {
@@ -155,30 +155,50 @@ class _ReturnedBooksPageState extends State<ReturnedBooksPage> {
             SizedBox(height: 20),
             // Display Returned Books
             Expanded(
-              child: DataTable(
-                columns: [
-                  DataColumn(label: Text('Barcode')),
-                  DataColumn(label: Text('Borrower')),
-                  DataColumn(label: Text('Title')),
-                  DataColumn(label: Text('Date Borrowed')),
-                  DataColumn(label: Text('Due Date')),
-                  DataColumn(label: Text('Date Returned')),
-                  DataColumn(label: Text('Penalty')),
-                ],
-                rows: returnedBooks.map((book) {
-                  return DataRow(
-                    cells: [
-                      DataCell(Text(book.bookBarcode ?? 'Unknown Barcode')),
-                      DataCell(Text(book.borrowerName ?? 'Unknown Borrower')),
-                      DataCell(Text(book.bookTitle ?? 'Unknown Title')),
-                      DataCell(
-                          Text(book.dateBorrowed ?? 'Unknown Date Borrowed')),
-                      DataCell(Text(book.dueDate ?? 'Unknown Due Date')),
-                      DataCell(Text(book.dateReturned ?? 'Not Returned')),
-                      DataCell(Text(book.penalty ?? 'Unknown Penalty')),
-                    ],
+              child: ListView.builder(
+                itemCount: returnedBooks.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    elevation: 3,
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Barcode: ${returnedBooks[index].bookBarcode ?? 'Unknown Barcode'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Borrower: ${returnedBooks[index].borrowerName ?? 'Unknown Borrower'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Title: ${returnedBooks[index].bookTitle ?? 'Unknown Title'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Date Borrowed: ${returnedBooks[index].dateBorrowed ?? 'Unknown Date Borrowed'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Due Date: ${returnedBooks[index].dueDate ?? 'Unknown Due Date'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Date Returned: ${returnedBooks[index].dateReturned ?? 'Not Returned'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Penalty: ${returnedBooks[index].penalty ?? 'Unknown Penalty'}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
-                }).toList(),
+                },
               ),
             ),
           ],

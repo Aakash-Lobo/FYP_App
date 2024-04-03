@@ -35,7 +35,11 @@ class _StudentExaminationPageState extends State<StudentExaminationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Exam Page'),
+        title: Text(
+          'Exam Page',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: FutureBuilder(
         future: fetchAllExams(),
@@ -49,14 +53,27 @@ class _StudentExaminationPageState extends State<StudentExaminationPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final exam = snapshot.data![index];
-                return ListTile(
-                  title: Text(exam['ex_title']),
-                  subtitle: Text(exam['ex_description']),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      // Implement action when the button is pressed
-                    },
-                    child: Text('Start Now'),
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    title: Text(
+                      exam['ex_title'],
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                    subtitle: Text(
+                      exam['ex_description'],
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        // Implement action when the button is pressed
+                      },
+                      child: Text(
+                        'Start Now',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
                   ),
                 );
               },

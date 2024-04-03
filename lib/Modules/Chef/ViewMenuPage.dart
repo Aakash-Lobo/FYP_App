@@ -42,45 +42,78 @@ class _ViewMenuPageState extends State<ViewMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Menu'),
+        title: Text(
+          'View Menu',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: _pizzaItems.length,
         itemBuilder: (context, index) {
           final pizzaItem = _pizzaItems[index];
           return Card(
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            elevation: 4.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Cat. Id: ${pizzaItem['pizzaCategorieId']}'),
-                Image.network(
-                  'http://example.com/pizza-${pizzaItem['pizzaId']}.jpg',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
+                Text(
+                  'Cat. Id: ${pizzaItem['productCategorieId']}',
+                  style: TextStyle(fontFamily: 'Raleway'),
+                ),
+                SizedBox(height: 8.0),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    'http://localhost/fyp/app/modules/cafe/Images/pizza-' +
+                        '${pizzaItem['productCategorieId']}.jpg',
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Name: ${pizzaItem['pizzaName']}'),
-                      Text('Description: ${pizzaItem['pizzaDesc']}'),
-                      Text('Price: ${pizzaItem['pizzaPrice']}'),
+                      Text(
+                        'Name: ${pizzaItem['productName']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      Text(
+                        'Description: ${pizzaItem['productDesc']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      Text(
+                        'Price: ${pizzaItem['productPrice']}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle edit button press
-                  },
-                  child: Text('Edit'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle delete button press
-                  },
-                  child: Text('Delete'),
+                ButtonBar(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle edit button press
+                      },
+                      child: Text(
+                        'Edit',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle delete button press
+                      },
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
