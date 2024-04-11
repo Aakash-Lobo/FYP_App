@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Warden/AddRoomPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'EditRoomPage.dart';
@@ -173,6 +174,17 @@ class _ViewRoomPageState extends State<ViewRoomPage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddRoomPage(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

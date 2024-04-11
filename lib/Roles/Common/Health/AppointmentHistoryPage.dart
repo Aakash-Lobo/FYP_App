@@ -43,22 +43,35 @@ class _AppointmentHistoryPageState extends State<AppointmentHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Appointment History'),
+        title: Text('Appointment History',
+            style: TextStyle(fontFamily: 'Raleway')),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: appointments.length,
         itemBuilder: (context, index) {
           var appointment = appointments[index];
-          return ListTile(
-            title: Text('Doctor: ${appointment['doctor']}'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Fees: \$${appointment['docFees']}'),
-                Text('Date: ${appointment['appdate']}'),
-                Text('Time: ${appointment['apptime']}'),
-                Text('Status: ${appointment['status']}'),
-              ],
+          return Card(
+            margin: EdgeInsets.all(8),
+            child: ListTile(
+              title: Text(
+                'Doctor: ${appointment['doctor']}',
+                style: TextStyle(
+                    fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Fees: \$${appointment['docFees']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Date: ${appointment['appdate']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Time: ${appointment['apptime']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Status: ${appointment['status']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                ],
+              ),
             ),
           );
         },

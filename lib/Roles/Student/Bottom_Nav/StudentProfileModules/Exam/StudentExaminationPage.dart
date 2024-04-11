@@ -110,11 +110,20 @@ class CustomSideNavigationBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text('Your Name'),
+            accountName: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [],
+            ),
             accountEmail: Text(username),
             currentAccountPicture: CircleAvatar(
-                // Add your profile picture here
-                ),
+              radius: 80,
+              backgroundColor: Colors.grey[200],
+              child: Icon(
+                Icons.person,
+                size: 40,
+                color: Colors.blue,
+              ),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.library_books),

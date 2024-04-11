@@ -45,31 +45,75 @@ class _StudentFeePageState extends State<StudentFeePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Fee'),
+        title: Text(
+          'Student Fee',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Student Fee Page',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
             SizedBox(height: 20.0),
             TextField(
               controller: _rollNoController,
-              decoration: InputDecoration(labelText: 'Enter Roll No'),
+              decoration: InputDecoration(
+                labelText: 'Enter Roll No',
+                hintText: 'Add Number',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
             TextField(
               controller: _amountController,
-              decoration: InputDecoration(labelText: 'Enter Amount for Fee'),
+              decoration: InputDecoration(
+                labelText: 'Enter Amount for Fee',
+                hintText: 'Add Fee',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: _submitForm,
-              child: Text('Submit'),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: _submitForm,
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Raleway', // Apply Raleway font to button text
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  primary: Colors.blue, // Set button background color
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
           ],

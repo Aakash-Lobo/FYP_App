@@ -122,124 +122,276 @@ class _AddVacancyPageState extends State<AddVacancyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Vacancy'),
+        title: Text(
+          'Add Vacancy',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0, // Remove app bar shadow
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TextFormField(
-                controller: _companyIDController,
-                decoration: InputDecoration(labelText: 'Company ID:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the company ID';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _categoryController,
-                decoration: InputDecoration(labelText: 'Category:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the category';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _occupationTitleController,
-                decoration: InputDecoration(labelText: 'Occupation Title:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the occupation title';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _reqNoEmployeesController,
-                decoration:
-                    InputDecoration(labelText: 'Required No. of Employees:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the required no. of employees';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _salariesController,
-                decoration: InputDecoration(labelText: 'Salaries:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the salaries';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _durationEmploymentController,
-                decoration:
-                    InputDecoration(labelText: 'Duration of Employment:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the duration of employment';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _qualificationWorkExperienceController,
-                decoration: InputDecoration(
-                    labelText: 'Qualification/Work Experience:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the qualification/work experience';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _jobDescriptionController,
-                decoration: InputDecoration(labelText: 'Job Description:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the job description';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _preferredSexController,
-                decoration: InputDecoration(labelText: 'Preferred Sex:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the preferred sex';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _sectorVacancyController,
-                decoration: InputDecoration(labelText: 'Sector Vacancy:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the sector vacancy';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: addVacancy,
-                child: Text('Submit'),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  controller: _companyIDController,
+                  decoration: InputDecoration(
+                    labelText: 'Company ID:*',
+                    hintText: 'Add ID',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the company ID';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20), // Add spacing between fields
+                TextFormField(
+                  controller: _categoryController,
+                  decoration: InputDecoration(
+                    labelText: 'Category:*',
+                    hintText: 'Add Category',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the category';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20), // Add spacing between fields
+                TextFormField(
+                  controller: _occupationTitleController,
+                  decoration: InputDecoration(
+                    labelText: 'Occupation Title:*',
+                    hintText: 'Add Title',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the occupation title';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _reqNoEmployeesController,
+                  decoration: InputDecoration(
+                    labelText: 'Required No. of Employees:*',
+                    hintText: 'Add Number',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the required no. of employees';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _salariesController,
+                  decoration: InputDecoration(
+                    labelText: 'Salaries:*',
+                    hintText: 'Add Salary',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the salaries';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _durationEmploymentController,
+                  decoration: InputDecoration(
+                    labelText: 'Duration of Employment:*',
+                    hintText: 'Add Duration',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the duration of employment';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _qualificationWorkExperienceController,
+                  decoration: InputDecoration(
+                    labelText: 'Qualification/Work Experience:*',
+                    hintText: 'Add Qualification',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the qualification/work experience';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _jobDescriptionController,
+                  decoration: InputDecoration(
+                    labelText: 'Job Description:*',
+                    hintText: 'Add Description',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the job description';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _preferredSexController,
+                  decoration: InputDecoration(
+                    labelText: 'Preferred Sex:*',
+                    hintText: 'Add Sex',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the preferred sex';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  controller: _sectorVacancyController,
+                  decoration: InputDecoration(
+                    labelText: 'Sector Vacancy:*',
+                    hintText: 'Add Sector',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the sector vacancy';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity, // Set button width to match parent
+                  height: 50, // Set button height
+                  child: ElevatedButton(
+                    onPressed: addVacancy,
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Raleway',
+                          color: Colors.white), // Apply Raleway font
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      primary: Colors.blue, // Set button background color
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -105,108 +105,245 @@ class _AddBooksPageState extends State<AddBooksPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Books'),
+        centerTitle: true,
+        title: Text(
+          'Add Books',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Add Books Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        child: DefaultTextStyle(
+          style: TextStyle(fontFamily: 'Raleway', color: Colors.black),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Increase spacing between fields
+                  TextFormField(
+                    controller: _bookTitleController,
+                    decoration: InputDecoration(
+                      labelText: 'Book Title:*',
+                      hintText: 'Add Title',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the book title';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20), // Increase spacing between fields
+                  TextFormField(
+                    controller: _authorController,
+                    decoration: InputDecoration(
+                      labelText: 'Author:*',
+                      hintText: 'Add Author',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the author';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _author2Controller,
+                    decoration: InputDecoration(
+                      labelText: 'Author 2:',
+                      hintText: 'Add Author',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _publicationController,
+                    decoration: InputDecoration(
+                      labelText: 'Publication:',
+                      hintText: 'Add Publication',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _publisherNameController,
+                    decoration: InputDecoration(
+                      labelText: 'Publisher Name:',
+                      hintText: 'Add Name',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _isbnController,
+                    decoration: InputDecoration(
+                      labelText: 'ISBN:*',
+                      hintText: 'Add Number',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the ISBN';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _copyrightYearController,
+                    decoration: InputDecoration(
+                      labelText: 'Copyright Year:',
+                      hintText: 'Add Year',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _bookCopiesController,
+                    decoration: InputDecoration(
+                      labelText: 'Book Copies:*',
+                      hintText: 'Add Copies',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the number of book copies';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20), // Increase spacing between fields
+                  DropdownButtonFormField(
+                    value: _selectedCategory,
+                    items: _categories.map((Category category) {
+                      return DropdownMenuItem(
+                        value: category.classname,
+                        child: Text(category.classname),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedCategory = value as String?;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Category:*',
+                      hintText: 'Add Category',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please select a category';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 20), // Increase spacing between fields
+                  SizedBox(
+                    width: double
+                        .infinity, // Set button width to match input fields
+                    height: 50, // Set button height
+                    child: ElevatedButton(
+                      onPressed: addBook,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              10), // Set border radius to 10
+                        ),
+                        backgroundColor: Colors.blue,
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 20),
-              TextFormField(
-                controller: _bookTitleController,
-                decoration: InputDecoration(labelText: 'Book Title:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the book title';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _authorController,
-                decoration: InputDecoration(labelText: 'Author:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the author';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _author2Controller,
-                decoration: InputDecoration(labelText: 'Author 2:'),
-              ),
-              TextFormField(
-                controller: _publicationController,
-                decoration: InputDecoration(labelText: 'Publication:'),
-              ),
-              TextFormField(
-                controller: _publisherNameController,
-                decoration: InputDecoration(labelText: 'Publisher Name:'),
-              ),
-              TextFormField(
-                controller: _isbnController,
-                decoration: InputDecoration(labelText: 'ISBN:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the ISBN';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _copyrightYearController,
-                decoration: InputDecoration(labelText: 'Copyright Year:'),
-              ),
-              TextFormField(
-                controller: _bookCopiesController,
-                decoration: InputDecoration(labelText: 'Book Copies:*'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the number of book copies';
-                  }
-                  return null;
-                },
-              ),
-              DropdownButtonFormField(
-                value: _selectedCategory,
-                items: _categories.map((Category category) {
-                  return DropdownMenuItem(
-                    value: category
-                        .classname, // Use the category's classname as the value
-                    child: Text(category.classname),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCategory = value as String?;
-                  });
-                },
-                decoration: InputDecoration(
-                  labelText: 'Category:*',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please select a category';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: addBook,
-                child: Text('Submit'),
-              ),
-            ],
+            ),
           ),
         ),
       ),

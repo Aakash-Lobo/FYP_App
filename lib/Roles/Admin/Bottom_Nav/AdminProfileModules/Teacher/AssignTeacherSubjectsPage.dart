@@ -29,7 +29,14 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assign Subjects'),
+        title: Text(
+          'Assign Subjects',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,14 +44,22 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              Text(
-                'Assign Subjects Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
+              SizedBox(height: 20), // Add spacing between text and form fields
               TextFormField(
                 controller: teacherIdController,
-                decoration: InputDecoration(labelText: 'Enter Teacher Id:'),
+                decoration: InputDecoration(
+                  labelText: 'Enter Teacher Id:',
+                  hintText: 'Add ID',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the teacher id';
@@ -52,6 +67,7 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               buildDropdownFormField(
                 labelText: 'Select Course:',
                 options: [
@@ -66,9 +82,22 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
                   });
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: semesterController,
-                decoration: InputDecoration(labelText: 'Enter Semester:'),
+                decoration: InputDecoration(
+                  labelText: 'Enter Semester:',
+                  hintText: 'Add Semester',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the semester';
@@ -76,10 +105,22 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: subjectCodeController,
-                decoration:
-                    InputDecoration(labelText: 'Please Select Subject:'),
+                decoration: InputDecoration(
+                  labelText: 'Please Select Subject:',
+                  hintText: 'Add Subject',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please select a subject';
@@ -87,6 +128,7 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               buildDropdownFormField(
                 labelText: 'Enter Total Classes:',
                 options: [
@@ -101,16 +143,35 @@ class _AssignTeacherSubjectsPageState extends State<AssignTeacherSubjectsPage> {
                   });
                 },
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, send data to server
-                    _submitForm();
-                  }
-                },
-                child: Text('Submit'),
+              SizedBox(height: 20), // Add spacing between form fields
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // If the form is valid, send data to server
+                      _submitForm();
+                    }
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily:
+                          'Raleway', // Apply Raleway font to button text
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between button and bottom
             ],
           ),
         ),

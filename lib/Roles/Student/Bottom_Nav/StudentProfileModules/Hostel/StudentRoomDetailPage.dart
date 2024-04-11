@@ -45,7 +45,10 @@ class _StudentRoomDetailPageState extends State<StudentRoomDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Room Detail Page'),
+        title: Text('Room Detail Page',
+            style:
+                TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
+        centerTitle: true,
       ),
       body: Center(
         child: roomData.isEmpty
@@ -62,14 +65,19 @@ class _StudentRoomDetailPageState extends State<StudentRoomDetailPage> {
                         ListTile(
                           title: Text(
                             'Room Number: ${room['room_number']}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Raleway'),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Seater: ${room['seater']}'),
-                              Text('Rent: ${room['rent']}'),
-                              Text('Facilities: ${room['facilities']}'),
+                              Text('Seater: ${room['seater']}',
+                                  style: TextStyle(fontFamily: 'Raleway')),
+                              Text('Rent: ${room['rent']}',
+                                  style: TextStyle(fontFamily: 'Raleway')),
+                              Text('Facilities: ${room['facilities']}',
+                                  style: TextStyle(fontFamily: 'Raleway')),
                               // Add more room details here as needed
                             ],
                           ),
@@ -78,21 +86,26 @@ class _StudentRoomDetailPageState extends State<StudentRoomDetailPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'Additional Details:',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Raleway'),
                           ),
                         ),
                         Divider(),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Room Type: ${room['room_type']}'),
+                          child: Text('Room Type: ${room['room_type']}',
+                              style: TextStyle(fontFamily: 'Raleway')),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Availability: ${room['availability']}'),
+                          child: Text('Availability: ${room['availability']}',
+                              style: TextStyle(fontFamily: 'Raleway')),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('Location: ${room['location']}'),
+                          child: Text('Location: ${room['location']}',
+                              style: TextStyle(fontFamily: 'Raleway')),
                         ),
                         // Add more room details here as needed
                       ],

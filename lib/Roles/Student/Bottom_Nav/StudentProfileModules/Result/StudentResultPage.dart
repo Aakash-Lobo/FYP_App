@@ -1,81 +1,141 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semfive.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semfour.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semone.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semsix.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semthree.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/Semesters/semtwo.dart';
 
-class StudentResultPage extends StatefulWidget {
+class StudentResultPage extends StatelessWidget {
   final String username;
 
   StudentResultPage({required this.username});
 
   @override
-  _StudentResultPageState createState() => _StudentResultPageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Semesters'),
+      ),
+      body: ListView(
+        children: [
+          SemestersGroup(semesters: [1, 2], username: username),
+          Divider(),
+          SemestersGroup(semesters: [3, 4], username: username),
+          Divider(),
+          SemestersGroup(semesters: [5, 6], username: username),
+        ],
+      ),
+    );
+  }
 }
 
-class _StudentResultPageState extends State<StudentResultPage> {
-  List<Map<String, dynamic>> results = [];
+class SemestersGroup extends StatelessWidget {
+  final List<int> semesters;
+  final String username;
+
+  SemestersGroup({required this.semesters, required this.username});
 
   @override
-  void initState() {
-    super.initState();
-    fetchData();
+  Widget build(BuildContext context) {
+    return Column(
+      children: semesters.map((semester) {
+        return SemesterTile(
+          semester: semester,
+          username: username,
+        );
+      }).toList(),
+    );
   }
+}
 
-  Future<void> fetchData() async {
-    // Modify the URL according to your backend API endpoint
-    final url = Uri.parse(
-        'http://localhost/fyp/app/student/Bottom/result/viewresult.php');
+class SemesterTile extends StatelessWidget {
+  final int semester;
+  final String username;
 
-    // Modify the headers according to your backend requirements
-    final headers = {'Content-Type': 'application/json'};
+  SemesterTile({required this.semester, required this.username});
 
-    try {
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: json.encode({'roll_no': widget.username}),
-      );
-
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body) as Map<String, dynamic>;
-        setState(() {
-          results = List<Map<String, dynamic>>.from(responseData['results']);
-        });
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (error) {
-      print(error);
-    }
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: Text('Semester $semester'),
+      children: [
+        ListTile(
+          title: Text('View Semester $semester'),
+          onTap: () {
+            switch (semester) {
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SemesterOneResult(username: username),
+                  ),
+                );
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SemesterTwoResult(username: username),
+                  ),
+                );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SemesterThreeResult(username: username),
+                  ),
+                );
+                break;
+              case 4:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SemesterFourResult(username: username),
+                  ),
+                );
+                break;
+              case 5:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SemesterFiveResult(username: username),
+                  ),
+                );
+                break;
+              case 6:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SemesterSixResult(username: username),
+                  ),
+                );
+                break;
+            }
+          },
+        ),
+      ],
+    );
   }
+}
+
+class SemesterDetailsPage extends StatelessWidget {
+  final int semester;
+
+  SemesterDetailsPage({required this.semester});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result Page'),
+        title: Text('Semester $semester Details'),
       ),
       body: Center(
-        child: ListView.builder(
-          itemCount: results.length,
-          itemBuilder: (context, index) {
-            final result = results[index];
-            return ListTile(
-              title: Text(result['courseCode'] + '-' + result['semester']),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Course Code: ${result['courseCode']}'),
-                  Text('Subject Code: ${result['subjectCode']}'),
-                  Text('Credit Hours: ${result['creditHours']}'),
-                  Text('Total Marks: ${result['totalMarks']}'),
-                  Text('Obtain Marks: ${result['obtainMarks']}'),
-                  Text('Grade: ${result['grade']}'),
-                  Text('CGPA: ${result['cgpa']}'),
-                ],
-              ),
-            );
-          },
-        ),
+        child: Text('Details for Semester $semester'),
       ),
     );
   }

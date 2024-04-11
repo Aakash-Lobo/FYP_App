@@ -47,46 +47,50 @@ class _MyBookPageState extends State<MyBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Books'),
+        title: Text(
+          'View Books',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'View Books Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Book')),
-                DataColumn(label: Text('Title')),
-                DataColumn(label: Text('Author')),
-              ],
-              rows: filteredBooks.map((book) {
-                return DataRow(
-                  cells: [
-                    DataCell(
-                      book['book_image'] != null
-                          ? Image.network(
-                              "http://localhost/fyp/app/modules/lib/Images/${book['book_image']}",
-                              width: 50,
-                              height: 50,
-                            )
-                          : Image.network(
-                              "http://localhost/fyp/app/modules/lib/Images/book_image.jpg",
-                              width: 50,
-                              height: 50,
-                            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: filteredBooks.length,
+              itemBuilder: (context, index) {
+                final book = filteredBooks[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  elevation: 4.0,
+                  child: ListTile(
+                    leading: book['book_image'] != null
+                        ? Image.network(
+                            "http://localhost/fyp/app/modules/lib/Images/${book['book_image']}",
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            "http://localhost/fyp/app/modules/lib/Images/book_image.jpg",
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                    title: Text(
+                      book['book_title'],
+                      style: TextStyle(fontFamily: 'Raleway'),
                     ),
-                    DataCell(Text(book['book_title'])),
-                    DataCell(Text(book['author'])),
-                  ],
+                    subtitle: Text(
+                      book['author'],
+                      style: TextStyle(fontFamily: 'Raleway'),
+                    ),
+                  ),
                 );
-              }).toList(),
+              },
             ),
           ],
         ),

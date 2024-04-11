@@ -4,14 +4,14 @@ import 'package:flutter_application_1/Modules/Doctor/doctor_home.dart';
 import 'package:flutter_application_1/Modules/Librarian/librarian_home.dart';
 import 'package:flutter_application_1/Modules/Warden/warden_home.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Complaint/admin_complaint.dart';
-import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Feedback/admin_feedback.dart';
+// import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Feedback/admin_feedback.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Notices/admin_notice.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Roles/admin_role_index.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Staff/admin_staff_index.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Student/admin_student_index.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Teacher/admin_teacher_index.dart';
 import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Timetable/admin_timetable.dart';
-import 'Course/admin_course_index.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Course/admin_course_index.dart';
 
 class AdminProfilePage extends StatelessWidget {
   final String username;
@@ -46,14 +46,13 @@ class AdminProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Attendance page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         AttendanceStudentPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminStudent(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.school,
@@ -75,13 +74,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Examination page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => StudentExaminationPage(
-                            //         username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminTeacher(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.person,
@@ -103,13 +102,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Placement page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentPlacementPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminStaff(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.group,
@@ -131,13 +130,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Courses page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentCoursesPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminCourse(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.library_books,
@@ -165,13 +164,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Fees page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentFeesPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminRole(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.group_work,
@@ -193,13 +192,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Result page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         TeacherResultPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminNotices(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.notification_important,
@@ -221,13 +220,13 @@ class AdminProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Counselling page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         CommonCounselPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminTimeTable(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.access_time,
@@ -248,8 +247,13 @@ class AdminProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Feedback page
-                            // (Add navigation logic here)
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AdminComplaint(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.feedback,
@@ -257,7 +261,7 @@ class AdminProfilePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Feedback',
+                          'Complaint',
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Raleway',
@@ -381,7 +385,7 @@ class AdminProfilePage extends StatelessWidget {
                       },
                       child: CustomRectangularCard(
                         imageUrl: 'assets/CommonBanner/transport.jpeg',
-                        title: 'Transportation',
+                        title: 'Counselling',
                         shadowColor: Colors.grey.withOpacity(0.5),
                       ),
                     ),

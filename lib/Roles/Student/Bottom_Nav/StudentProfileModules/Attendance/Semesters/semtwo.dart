@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AccessRolesPage extends StatelessWidget {
+class SemesterTwoAttend extends StatelessWidget {
   final String username;
 
-  AccessRolesPage({required this.username});
+  SemesterTwoAttend({required this.username});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Menu'),
+        title: Text('Room Detail Page'),
       ),
       body: Center(
-        child: Text('Welcome to the Order Page, $username!'),
+        child: Text('Welcome to the Room Detail Page, $username!'),
       ),
     );
   }

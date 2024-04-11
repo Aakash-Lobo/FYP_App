@@ -81,7 +81,10 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Add Subjects Page'),
+        title: Text(
+          'Add Subjects',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -92,7 +95,19 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
             children: [
               TextFormField(
                 controller: _subjectCodeController,
-                decoration: InputDecoration(labelText: 'Subject Code'),
+                decoration: InputDecoration(
+                  labelText: 'Subject Code',
+                  hintText: 'Enter Subject Code',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the subject code';
@@ -100,9 +115,24 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: _subjectNameController,
-                decoration: InputDecoration(labelText: 'Subject Name'),
+                decoration: InputDecoration(
+                  labelText: 'Subject Name',
+                  hintText: 'Enter Subject Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the subject name';
@@ -110,15 +140,33 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: _semesterController,
-                decoration: InputDecoration(labelText: 'Semester'),
+                decoration: InputDecoration(
+                  labelText: 'Semester',
+                  hintText: 'Enter Semester',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the semester';
                   }
                   return null;
                 },
+              ),
+              SizedBox(
+                height: 20,
               ),
               DropdownButtonFormField(
                 value: _selectedCourse,
@@ -134,7 +182,18 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
                     _selectedCourse = value as String?;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Select Course'),
+                decoration: InputDecoration(
+                  labelText: 'Select Course',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (dynamic value) {
                   if (value == null) {
                     return 'Please select a course';
@@ -142,10 +201,25 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: _creditHoursController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Credit Hours'),
+                decoration: InputDecoration(
+                  labelText: 'Credit Hours',
+                  hintText: 'Enter Credit Hours',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the credit hours';
@@ -158,6 +232,12 @@ class _AdminAddSubjectsState extends State<AdminAddSubjects> {
                 child: ElevatedButton(
                   onPressed: addSubject,
                   child: Text('Add Subject'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
                 ),
               ),
             ],

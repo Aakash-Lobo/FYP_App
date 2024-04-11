@@ -40,7 +40,14 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Teacher'),
+        title: Text(
+          'Add Teacher',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,14 +55,22 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              Text(
-                'Add Teacher Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
               SizedBox(height: 20),
               TextFormField(
                 controller: firstNameController,
-                decoration: InputDecoration(labelText: 'Teacher First Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Teacher First Name:*',
+                  hintText: 'Add First Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the first name';
@@ -63,23 +78,72 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: middleNameController,
-                decoration: InputDecoration(labelText: 'Teacher Middle Name:'),
+                decoration: InputDecoration(
+                  labelText: 'Teacher Middle Name:',
+                  hintText: 'Add Middle Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: lastNameController,
-                decoration: InputDecoration(labelText: 'Teacher Last Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Teacher Last Name:*',
+                  hintText: 'Add Last Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: fatherNameController,
-                decoration: InputDecoration(labelText: 'Father Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Father Name:*',
+                  hintText: 'Add Father Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Teacher Email:*',
-                  hintText: 'example@example.com',
+                  hintText: 'Add Email',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains('@')) {
@@ -88,9 +152,22 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: phoneNoController,
-                decoration: InputDecoration(labelText: 'Mobile No:*'),
+                decoration: InputDecoration(
+                  labelText: 'Mobile No:*',
+                  hintText: 'Add Number',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the mobile number';
@@ -98,6 +175,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               buildDropdownFormField(
                 labelText: 'Teacher Status:',
                 options: ['Permanent', 'Contract'],
@@ -108,6 +186,7 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   });
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               buildDropdownFormField(
                 labelText: 'Application Status:',
                 options: ['Approved', 'Not Approved'],
@@ -118,14 +197,41 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   });
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: dobController,
-                decoration: InputDecoration(labelText: 'Date of Birth:'),
+                decoration: InputDecoration(
+                  labelText: 'Date of Birth:',
+                  hintText: 'Add DOB',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: otherPhoneController,
-                decoration: InputDecoration(labelText: 'Other Phone No:'),
+                decoration: InputDecoration(
+                  labelText: 'Other Phone No:',
+                  hintText: 'Add Number',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               buildDropdownFormField(
                 labelText: 'Gender:',
                 options: ['Male', 'Female'],
@@ -136,36 +242,121 @@ class _AddTeacherPageState extends State<AddTeacherPage> {
                   });
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: permanentAddressController,
-                decoration: InputDecoration(labelText: 'Permanent Address:'),
+                decoration: InputDecoration(
+                  labelText: 'Permanent Address:',
+                  hintText: 'Add Address',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: currentAddressController,
-                decoration: InputDecoration(labelText: 'Current Address:'),
+                decoration: InputDecoration(
+                  labelText: 'Current Address:',
+                  hintText: 'Add Address',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: placeOfBirthController,
-                decoration: InputDecoration(labelText: 'Place of Birth:'),
+                decoration: InputDecoration(
+                  labelText: 'Place of Birth:',
+                  hintText: 'Add Place',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: lastQualificationController,
-                decoration: InputDecoration(labelText: 'Last Qualification:*'),
+                decoration: InputDecoration(
+                  labelText: 'Last Qualification:*',
+                  hintText: 'Add Qualification',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: stateController,
-                decoration: InputDecoration(labelText: 'State:*'),
+                decoration: InputDecoration(
+                  labelText: 'State:*',
+                  hintText: 'Add State',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, send data to server
-                    _submitForm();
-                  }
-                },
-                child: Text('Submit'),
+              SizedBox(height: 20), // Add spacing between form fields
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // If the form is valid, send data to server
+                      _submitForm();
+                    }
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily:
+                          'Raleway', // Apply Raleway font to button text
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
+                ),
               ),
+              SizedBox(
+                  height: 20), // Add spacing between form fields and button
             ],
           ),
         ),

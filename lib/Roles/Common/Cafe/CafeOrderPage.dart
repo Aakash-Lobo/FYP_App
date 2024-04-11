@@ -12,34 +12,24 @@ class CafeOrderPage extends StatefulWidget {
 }
 
 class _CafeOrderPageState extends State<CafeOrderPage> {
-  List<Map<String, dynamic>> ordersData = [];
-  List<Map<String, dynamic>> filteredOrders = [];
+  List<dynamic> orders = [];
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchOrders();
   }
 
-  Future<void> fetchData() async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            "http://localhost/fyp/app/common/cafe/vieworders.php?username=${widget.username}"),
-        headers: {'Content-Type': 'application/json'},
-      );
+  Future<void> fetchOrders() async {
+    final response = await http.get(Uri.parse(
+        'http://localhost/fyp/app/common/cafe/vieworders.php?username=${Uri.encodeComponent(widget.username)}'));
 
-      if (response.statusCode == 200) {
-        List<dynamic> data = json.decode(response.body);
-        setState(() {
-          ordersData = List<Map<String, dynamic>>.from(data);
-          filteredOrders = List<Map<String, dynamic>>.from(data);
-        });
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (error) {
-      print('Error fetching data: $error');
+    if (response.statusCode == 200) {
+      setState(() {
+        orders = jsonDecode(response.body)['orders'];
+      });
+    } else {
+      throw Exception('Failed to load orders');
     }
   }
 
@@ -47,51 +37,33 @@ class _CafeOrderPageState extends State<CafeOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Orders'),
+        title: Text('My Orders',
+            style:
+                TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Only horizontal scrolling
-        child: DataTable(
-          columnSpacing: 16, // Adjust spacing between columns
-          columns: [
-            DataColumn(label: Text('Order Id')),
-            DataColumn(label: Text('Address')),
-            DataColumn(label: Text('Phone No')),
-            DataColumn(label: Text('Amount')),
-            DataColumn(label: Text('Payment Mode')),
-            DataColumn(label: Text('Order Date')),
-            DataColumn(label: Text('Status')),
-            DataColumn(label: Text('Items')),
-          ],
-          rows: filteredOrders.map((order) {
-            return DataRow(
-              cells: [
-                DataCell(Text(order['orderId'])),
-                DataCell(Text(order['address'])),
-                DataCell(Text(order['phoneNo'])),
-                DataCell(Text(order['amount'])),
-                DataCell(Text(order['paymentMode'])),
-                DataCell(Text(order['orderDate'])),
-                DataCell(
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle status button press
-                    },
-                    child: Text('View Status'),
-                  ),
-                ),
-                DataCell(
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle items button press
-                    },
-                    child: Text('View Items'),
-                  ),
-                ),
-              ],
-            );
-          }).toList(),
-        ),
+      body: ListView.builder(
+        itemCount: orders.length,
+        itemBuilder: (context, index) {
+          return Card(
+            margin: EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Text('Order ID: ${orders[index]['orderId']}'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Address: ${orders[index]['address']}'),
+                  Text('Phone No: ${orders[index]['phoneNo']}'),
+                  Text('Amount: ${orders[index]['amount']}'),
+                  Text('Payment Mode: ${orders[index]['paymentMode']}'),
+                  Text('Order Date: ${orders[index]['orderDate']}'),
+                ],
+              ),
+              onTap: () {
+                // Handle tap on order
+              },
+            ),
+          );
+        },
       ),
     );
   }

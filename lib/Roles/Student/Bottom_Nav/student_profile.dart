@@ -5,8 +5,10 @@ import 'package:flutter_application_1/Roles/Common/Counselling/CommonCounselPage
 import 'package:flutter_application_1/Roles/Common/Health/CommonHealthPage.dart';
 import 'package:flutter_application_1/Roles/Common/Library/CommonLibraryPage.dart';
 import 'package:flutter_application_1/Roles/Common/Merch/StudentMerchPage.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Attendance/StudentAttendancePage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Course/StudentCoursesPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Exam/StudentExaminationPage.dart';
+import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Feedback/StudentFeedbackPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Placement/StudentPlacementPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Result/StudentResultPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Fees/StudentFeesPage.dart';
@@ -48,8 +50,8 @@ class StudentProfilePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    StudentAttendancePage(username: username),
+                                builder: (context) => StudentViewAttendancePage(
+                                    username: username),
                               ),
                             );
                           },
@@ -135,12 +137,12 @@ class StudentProfilePage extends StatelessWidget {
                             );
                           },
                           child: CustomSquare(
-                            icon: Icons.book,
+                            icon: Icons.schedule,
                             color: Colors.purple,
                           ),
                         ),
                         Text(
-                          'Notes',
+                          'TimeTable',
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Raleway',
@@ -244,7 +246,7 @@ class StudentProfilePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CommonCounselPage(username: username),
+                                    StudentFeedbackPage(username: username),
                               ),
                             );
                           },

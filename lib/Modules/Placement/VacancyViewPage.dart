@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Placement/AddVacancyPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -265,6 +266,17 @@ class _ViewVacancyPageState extends State<ViewVacancyPage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddVacancyPage(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -42,7 +42,9 @@ class _TeacherLeaveHistoryState extends State<TeacherLeaveHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Leave History'),
+        title: Text('Leave History',
+            style:
+                TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
       ),
       body: leaveHistory.isEmpty
           ? Center(
@@ -52,19 +54,29 @@ class _TeacherLeaveHistoryState extends State<TeacherLeaveHistory> {
               itemCount: leaveHistory.length,
               itemBuilder: (context, index) {
                 final leave = leaveHistory[index];
-                return ListTile(
-                  title: Text('Leave Type: ${leave['LeaveType']}'),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('From: ${leave['FromDate']}'),
-                      Text('To: ${leave['ToDate']}'),
-                      Text('Description: ${leave['Description']}'),
-                      Text('Posting Date: ${leave['PostingDate']}'),
-                      Text(
-                          'Admin Remark: ${leave['AdminRemark'] ?? 'Pending'}'),
-                      Text('Status: ${getStatusText(leave['Status'])}'),
-                    ],
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: ListTile(
+                    title: Text('Leave Type: ${leave['LeaveType']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('From: ${leave['FromDate']}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                        Text('To: ${leave['ToDate']}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                        Text('Description: ${leave['Description']}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                        Text('Posting Date: ${leave['PostingDate']}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                        Text(
+                            'Admin Remark: ${leave['AdminRemark'] ?? 'Pending'}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                        Text('Status: ${getStatusText(leave['Status'])}',
+                            style: TextStyle(fontFamily: 'Raleway')),
+                      ],
+                    ),
                   ),
                 );
               },

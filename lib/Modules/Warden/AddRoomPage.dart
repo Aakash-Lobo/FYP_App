@@ -93,48 +93,94 @@ class _AddRoomPageState extends State<AddRoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Room'),
+        title: Text(
+          'Add Room',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0, // Remove app bar shadow
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Welcome to the Add Room, ${widget.username}!',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            TextField(
+            TextFormField(
               controller: roomNoController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Room Number',
-                border: OutlineInputBorder(),
+                hintText: 'Add Number',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            TextField(
+            SizedBox(height: 20),
+            TextFormField(
               controller: seaterController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Seater',
-                border: OutlineInputBorder(),
+                hintText: 'Add Seater',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
-            SizedBox(height: 10),
-            TextField(
+            SizedBox(height: 20),
+            TextFormField(
               controller: feeController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Total Fees',
-                border: OutlineInputBorder(),
+                hintText: 'Add Fees',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: addRoom,
-              child: Text('Add Room'),
+            SizedBox(
+              width: double.infinity, // Set button width to match parent
+              height: 50, // Set button height
+              child: ElevatedButton(
+                onPressed: addRoom,
+                child: Text(
+                  'Add Room',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Raleway',
+                      color: Colors.white), // Apply Raleway font
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  primary: Colors.blue, // Set button background color
+                ),
+              ),
             ),
           ],
         ),

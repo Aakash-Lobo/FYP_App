@@ -70,7 +70,9 @@ flutter:
     - assets/CommonBanner/
     - assets/ERPBanner/
     - assets/General/
-    - assets/Modules/
+    - assets/Modules/Library/
+    - assets/Modules/Cafe/
+    - assets/Modules/Merch/
     - assets/PortalBanner/
     # - images/a_dot_ham.jpeg
 

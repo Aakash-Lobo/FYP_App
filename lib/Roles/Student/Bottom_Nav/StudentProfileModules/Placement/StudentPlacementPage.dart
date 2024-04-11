@@ -47,33 +47,7 @@ class _StudentPlacementPageState extends State<StudentPlacementPage> {
           });
         },
         children: <Widget>[
-          Center(
-            child: Scaffold(
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Stack(
-                    children: [
-                      Positioned(
-                        top: MediaQuery.of(context).size.height * 0.5,
-                        left: 24,
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.sunny_snowing,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          PlacementList(),
           CompanyPage(username: widget.username),
           CompanyMessage(username: widget.username),
         ],
@@ -83,6 +57,24 @@ class _StudentPlacementPageState extends State<StudentPlacementPage> {
         pageController: _pageController,
         username: widget.username,
       ),
+    );
+  }
+}
+
+class PlacementList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 10, // Placeholder for number of items
+      itemBuilder: (context, index) {
+        // Your list item widget
+        return ListTile(
+          title: Text('List item $index'),
+          onTap: () {
+            // Handle item tap
+          },
+        );
+      },
     );
   }
 }

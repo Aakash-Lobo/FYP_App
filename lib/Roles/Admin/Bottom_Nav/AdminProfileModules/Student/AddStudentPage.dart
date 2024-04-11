@@ -283,7 +283,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
                 ),
                 child: Text(
                   'Submit',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],

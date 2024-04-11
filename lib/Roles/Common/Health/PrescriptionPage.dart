@@ -43,7 +43,9 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prescription Page'),
+        title:
+            Text('Prescription Page', style: TextStyle(fontFamily: 'Raleway')),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: prescriptions.length,
@@ -53,15 +55,24 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
             padding: const EdgeInsets.all(8.0),
             child: Card(
               child: ListTile(
-                title: Text('Doctor: ${prescription['doctor']}'),
+                title: Text(
+                  'Doctor: ${prescription['doctor']}',
+                  style: TextStyle(
+                      fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Appointment Date: ${prescription['appdate']}'),
-                    Text('Appointment Time: ${prescription['apptime']}'),
-                    Text('Diseases: ${prescription['disease']}'),
-                    Text('Allergies: ${prescription['allergy']}'),
-                    Text('Prescriptions: ${prescription['prescription']}'),
+                    Text('Appointment Date: ${prescription['appdate']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
+                    Text('Appointment Time: ${prescription['apptime']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
+                    Text('Diseases: ${prescription['disease']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
+                    Text('Allergies: ${prescription['allergy']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
+                    Text('Prescriptions: ${prescription['prescription']}',
+                        style: TextStyle(fontFamily: 'Raleway')),
                   ],
                 ),
                 trailing: ElevatedButton(

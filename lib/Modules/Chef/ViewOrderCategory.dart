@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Chef/AddOrderCategoryPage.dart';
 import 'package:http/http.dart' as http;
 
 class ViewOrderCategoryPage extends StatefulWidget {
@@ -120,6 +121,18 @@ class _ViewOrderCategoryPageState extends State<ViewOrderCategoryPage> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  AddOrderCategoryPage(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

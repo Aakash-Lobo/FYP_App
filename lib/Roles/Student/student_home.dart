@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Common/about.dart';
+import 'package:flutter_application_1/Common/calender.dart';
+import 'package:flutter_application_1/Common/complaint.dart';
+import 'package:flutter_application_1/Common/expensemanager.dart';
+import 'package:flutter_application_1/Common/notice.dart';
+import 'package:flutter_application_1/Common/taskmanager.dart';
 import 'package:flutter_application_1/Credentials/logout.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/student_profile.dart';
-import 'package:flutter_application_1/chat.dart';
-import 'package:flutter_application_1/contact.dart';
-import 'package:flutter_application_1/inbox.dart';
-import 'package:flutter_application_1/settings.dart';
+import 'package:flutter_application_1/Common/settings.dart';
+import 'package:flutter_application_1/Roles/Student/Side_Nav/student_view_profile.dart';
+import '../../Common/contact.dart';
+import '../../Common/inbox.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class StudentHomePage extends StatefulWidget {
   final String username;
@@ -25,6 +33,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
   late String currentTime;
   final PageController _pageController = PageController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late List<Map<String, dynamic>> news = [];
 
   @override
   void initState() {
@@ -45,6 +54,28 @@ class _StudentHomePageState extends State<StudentHomePage> {
     return formattedTime;
   }
 
+  Future<List<Map<String, String>>> fetchNewsData() async {
+    final response = await http
+        .get(Uri.parse('http://localhost/fyp/app/roles/viewnotice.php'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = jsonDecode(response.body);
+      final List<Map<String, String>> newsList = [];
+
+      for (var item in responseData) {
+        newsList.add({
+          'image': 'assets/General/notice.jpg',
+          'title': item['title'].toString(),
+          'description': item['message'].toString(),
+        });
+      }
+
+      return newsList;
+    } else {
+      throw Exception('Failed to load news');
+    }
+  }
+
   @override
   void dispose() {
     _timer.cancel();
@@ -60,20 +91,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
           ? AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.chat),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ChatPage(username: widget.username),
-                      ),
-                    );
-                  },
-                ),
-              ],
+              actions: <Widget>[],
             )
           : null,
       drawer: CustomSideNavigationBar(
@@ -180,13 +198,26 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Text(
-                                              'View',
-                                              style: TextStyle(
-                                                fontFamily: 'Raleway',
-                                                fontSize: 16.0,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CalenderPage(
+                                                            username: widget
+                                                                .username),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 16.0,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -271,13 +302,26 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Text(
-                                              'View',
-                                              style: TextStyle(
-                                                fontFamily: 'Raleway',
-                                                fontSize: 16.0,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TaskManagerPage(
+                                                            username: widget
+                                                                .username),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 16.0,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -291,12 +335,10 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                           children: [
                                             TaskTile(
                                                 title: 'Task 1',
-                                                description:
-                                                    'Description of Task 1'),
+                                                description: 'Welcome to Task'),
                                             TaskTile(
                                                 title: 'Task 2',
-                                                description:
-                                                    'Description of Task 2'),
+                                                description: 'Add Your Task'),
                                           ],
                                         ),
                                       ),
@@ -325,13 +367,26 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Text(
-                                              'View',
-                                              style: TextStyle(
-                                                fontFamily: 'Raleway',
-                                                fontSize: 16.0,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        NoticePage(
+                                                            username: widget
+                                                                .username),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 16.0,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -339,27 +394,40 @@ class _StudentHomePageState extends State<StudentHomePage> {
                                       ),
                                       // News section tiles
                                       Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20.0),
-                                        child: Column(
-                                          children: [
-                                            NewsTile(
-                                              image:
-                                                  'assets/CommonBanner/library.jpeg',
-                                              title: 'News Title 1',
-                                              description:
-                                                  'Description of News 1',
-                                            ),
-                                            NewsTile(
-                                              image:
-                                                  'assets/CommonBanner/library.jpeg',
-                                              title: 'News Title 2',
-                                              description:
-                                                  'Description of News 2',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20.0),
+                                          child: FutureBuilder(
+                                            future:
+                                                fetchNewsData(), // Call the function to fetch news data
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return Center(
+                                                    child:
+                                                        CircularProgressIndicator());
+                                              } else if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else {
+                                                // Display only the first two news items
+                                                final newsList = snapshot.data!
+                                                    .take(2)
+                                                    .toList();
+                                                return Column(
+                                                  children:
+                                                      newsList.map((newsItem) {
+                                                    return NewsTile(
+                                                      image: newsItem['image']!,
+                                                      title: newsItem['title']!,
+                                                      description: newsItem[
+                                                          'description']!,
+                                                    );
+                                                  }).toList(),
+                                                );
+                                              }
+                                            },
+                                          ))
                                     ],
                                   ),
                                 ),
@@ -467,7 +535,10 @@ class NewsTile extends StatelessWidget {
         child: Image.asset(image, fit: BoxFit.cover),
       ),
       title: Text(title),
-      subtitle: Text(description),
+      subtitle: Text(
+        description,
+        style: TextStyle(overflow: TextOverflow.ellipsis),
+      ),
     );
   }
 }
@@ -519,7 +590,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: 'Modules',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.mail),
@@ -561,22 +632,66 @@ class CustomSideNavigationBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => StudentProfilePage(username: username),
+                  builder: (context) =>
+                      ViewStudentProfilePage(username: username),
                 ),
               );
             },
             child: UserAccountsDrawerHeader(
               accountName: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Your Name'),
-                  Text('View Profile', style: TextStyle(fontSize: 16)),
-                ],
+                children: [],
               ),
               accountEmail: Text(username),
-              currentAccountPicture: CircleAvatar(),
+              currentAccountPicture: CircleAvatar(
+                radius: 80,
+                backgroundColor: Colors.grey[200],
+                child: Icon(
+                  Icons.person,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+              ),
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.person_outline_rounded),
+            title: Text('View Profile'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ViewStudentProfilePage(username: username),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.question_answer),
+            title: Text('FAQ'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ExpenseManagerPage(username: username),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info_outline_rounded),
+            title: Text('About Us'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AboutPage(username: username),
+                ),
+              );
+            },
+          ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.contacts),
             title: Text('Contact'),
@@ -590,6 +705,19 @@ class CustomSideNavigationBar extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.help_outline_rounded),
+            title: Text('Complaint'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ComplaintPage(username: username),
+                ),
+              );
+            },
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),
             onTap: () {
@@ -601,6 +729,7 @@ class CustomSideNavigationBar extends StatelessWidget {
               );
             },
           ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),

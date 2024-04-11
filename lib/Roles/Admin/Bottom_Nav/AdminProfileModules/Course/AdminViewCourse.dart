@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Roles/Admin/Bottom_Nav/AdminProfileModules/Course/AdminAddCourse.dart';
 import 'package:http/http.dart' as http;
 
 class AdminViewCourse extends StatefulWidget {
@@ -54,76 +55,104 @@ class _AdminViewCourseState extends State<AdminViewCourse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin View Course Page'),
+        title: Text(
+          'View Course',
+          style: TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Admin View Course Information',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Username: ${widget.username}',
-              style: TextStyle(fontSize: 16),
-            ),
             SizedBox(height: 20),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Sr. No')),
-                DataColumn(label: Text('Course Code')),
-                DataColumn(label: Text('Course Name')),
-                DataColumn(label: Text('Semester/Years')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: courses
-                  .map(
-                    (course) => DataRow(
-                      cells: [
-                        DataCell(Text(course.srNo.toString())),
-                        DataCell(Text(course.courseCode)),
-                        DataCell(Text(course.courseName)),
-                        DataCell(Text(course.noOfYear)),
-                        DataCell(
-                          ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Confirm Delete'),
-                                    content: Text(
-                                        'Are you sure you want to delete this course?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          deleteCourse(course.courseCode);
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('Delete'),
-                                      ),
-                                    ],
-                                  );
-                                },
+            Expanded(
+              child: ListView.builder(
+                itemCount: courses.length,
+                itemBuilder: (context, index) {
+                  final course = courses[index];
+                  return Card(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: ListTile(
+                      title: Text(
+                        'Course Code: ${course.courseCode}',
+                        style: TextStyle(fontFamily: 'Raleway'),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Course Name: ${course.courseName}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                          Text(
+                            'Semester/Years: ${course.noOfYear}',
+                            style: TextStyle(fontFamily: 'Raleway'),
+                          ),
+                        ],
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  'Confirm Delete',
+                                  style: TextStyle(fontFamily: 'Raleway'),
+                                ),
+                                content: Text(
+                                  'Are you sure you want to delete this course?',
+                                  style: TextStyle(fontFamily: 'Raleway'),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Cancel',
+                                      style: TextStyle(fontFamily: 'Raleway'),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      deleteCourse(course.courseCode);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Delete',
+                                      style: TextStyle(fontFamily: 'Raleway'),
+                                    ),
+                                  ),
+                                ],
                               );
                             },
-                            child: Text('Delete'),
-                          ),
+                          );
+                        },
+                        child: Text(
+                          'Delete',
+                          style: TextStyle(fontFamily: 'Raleway'),
                         ),
-                      ],
+                      ),
                     ),
-                  )
-                  .toList(),
+                  );
+                },
+              ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AdminAddCourse(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

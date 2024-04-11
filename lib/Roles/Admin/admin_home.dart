@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../contact.dart';
+import 'package:flutter_application_1/Common/about.dart';
+import 'package:flutter_application_1/Common/calender.dart';
+import 'package:flutter_application_1/Common/complaint.dart';
+import 'package:flutter_application_1/Common/expensemanager.dart';
+import 'package:flutter_application_1/Common/notice.dart';
+import 'package:flutter_application_1/Common/taskmanager.dart';
+import 'package:flutter_application_1/Roles/Admin/Side_Nav/admin_view_profile.dart';
 import '../../Credentials/logout.dart';
-import '../../chat.dart';
-import '../../inbox.dart';
-import '../../settings.dart';
+import '../../Common/contact.dart';
+import '../../Common/inbox.dart';
+import '../../Common/settings.dart';
 import 'Bottom_Nav/AdminProfileModules/admin_profile.dart';
 import 'package:intl/intl.dart';
 
@@ -29,18 +35,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.chat),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ChatPage(username: widget.username),
-                      ),
-                    );
-                  },
-                ),
+                // IconButton(
+                //   icon: Icon(Icons.chat),
+                //   onPressed: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) =>
+                //             ChatPage(username: widget.username),
+                //       ),
+                //     );
+                //   },
+                // ),
               ],
             )
           : null,
@@ -138,13 +144,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Text(
-                                            'View',
-                                            style: TextStyle(
-                                              fontFamily: 'Raleway',
-                                              fontSize: 16.0,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CalenderPage(
+                                                          username:
+                                                              widget.username),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              'View',
+                                              style: TextStyle(
+                                                fontFamily: 'Raleway',
+                                                fontSize: 16.0,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -226,13 +245,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Text(
-                                            'View',
-                                            style: TextStyle(
-                                              fontFamily: 'Raleway',
-                                              fontSize: 16.0,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TaskManagerPage(
+                                                          username:
+                                                              widget.username),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              'View',
+                                              style: TextStyle(
+                                                fontFamily: 'Raleway',
+                                                fontSize: 16.0,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -246,12 +278,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         children: [
                                           TaskTile(
                                               title: 'Task 1',
-                                              description:
-                                                  'Description of Task 1'),
+                                              description: 'Welcome To Task'),
                                           TaskTile(
                                               title: 'Task 2',
-                                              description:
-                                                  'Description of Task 2'),
+                                              description: 'Add Your Task'),
                                         ],
                                       ),
                                     ),
@@ -272,7 +302,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'News and Updates',
+                                            'Notices and Updates',
                                             style: TextStyle(
                                               fontFamily: 'Raleway',
                                               fontSize: 20.0,
@@ -280,13 +310,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Text(
-                                            'View',
-                                            style: TextStyle(
-                                              fontFamily: 'Raleway',
-                                              fontSize: 16.0,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      NoticePage(
+                                                          username:
+                                                              widget.username),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              'View',
+                                              style: TextStyle(
+                                                fontFamily: 'Raleway',
+                                                fontSize: 16.0,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -299,15 +342,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       child: Column(
                                         children: [
                                           NewsTile(
-                                            image:
-                                                'assets/CommonBanner/library.jpeg',
+                                            image: 'assets/General/notice.jpg',
                                             title: 'News Title 1',
                                             description:
                                                 'Description of News 1',
                                           ),
                                           NewsTile(
-                                            image:
-                                                'assets/CommonBanner/library.jpeg',
+                                            image: 'assets/General/notice.jpg',
                                             title: 'News Title 2',
                                             description:
                                                 'Description of News 2',
@@ -433,7 +474,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: 'Modules',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.mail),
@@ -470,28 +511,60 @@ class CustomSideNavigationBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          GestureDetector(
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) =>
-            //           AdminViewProfilePage(username: username),
-            //     ),
-            //   );
-            // },
-            child: UserAccountsDrawerHeader(
-              accountName: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Your Name'), // Modify this as per your needs
-                  Text('View Profile', style: TextStyle(fontSize: 16)),
-                ],
+          UserAccountsDrawerHeader(
+            accountName: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [],
+            ),
+            accountEmail: Text(username),
+            currentAccountPicture: CircleAvatar(
+              radius: 80,
+              backgroundColor: Colors.grey[200],
+              child: Icon(
+                Icons.person,
+                size: 40,
+                color: Colors.blue,
               ),
-              accountEmail: Text(username),
-              currentAccountPicture: CircleAvatar(),
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.person_outline_rounded),
+            title: Text('View Profile'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      AdminViewProfilePage(username: username),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.question_answer),
+            title: Text('FAQ'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ExpenseManagerPage(username: username),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info_outline_rounded),
+            title: Text('About Us'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AboutPage(username: username),
+                ),
+              );
+            },
+          ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.contacts),
             title: Text('Contact'),
@@ -505,6 +578,19 @@ class CustomSideNavigationBar extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.help_outline_rounded),
+            title: Text('Complaint'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ComplaintPage(username: username),
+                ),
+              );
+            },
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),
             onTap: () {
@@ -516,6 +602,7 @@ class CustomSideNavigationBar extends StatelessWidget {
               );
             },
           ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),

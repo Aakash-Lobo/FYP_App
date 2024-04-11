@@ -44,7 +44,15 @@ class _AddOrderCategoryPageState extends State<AddOrderCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Category'),
+        title: Text(
+          'Add Category',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0, // Remove app bar shadow
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -53,29 +61,78 @@ class _AddOrderCategoryPageState extends State<AddOrderCategoryPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Category Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter category name';
-                  }
-                  return null;
-                },
+              SizedBox(
+                width: double.infinity,
+                child: TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Category Name',
+                    hintText: 'Add Name',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter category name';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              TextFormField(
-                controller: _descController,
-                decoration: InputDecoration(labelText: 'Category Description'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter category description';
-                  }
-                  return null;
-                },
+              SizedBox(height: 20), // Add spacing between fields
+              SizedBox(
+                width: double.infinity,
+                child: TextFormField(
+                  controller: _descController,
+                  decoration: InputDecoration(
+                    labelText: 'Category Description',
+                    hintText: 'Add Description',
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter category description';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              ElevatedButton(
-                onPressed: _addCategory,
-                child: Text('Add Category'),
+              SizedBox(height: 20), // Add spacing between fields
+              SizedBox(
+                width: double.infinity,
+                height: 50, // Set button height
+                child: ElevatedButton(
+                  onPressed: _addCategory,
+                  child: Text(
+                    'Add Category',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Raleway',
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    primary: Colors.blue,
+                  ),
+                ),
               ),
             ],
           ),

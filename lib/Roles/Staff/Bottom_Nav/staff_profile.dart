@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/CommonCounselPage.dart';
 import 'package:flutter_application_1/Roles/Staff/Bottom_Nav/StaffProfileModules/Leave/StaffLeavePage.dart';
+import 'package:flutter_application_1/Roles/Staff/Bottom_Nav/StaffProfileModules/Salary/StaffSalaryPage.dart';
+import 'package:flutter_application_1/Roles/Staff/Bottom_Nav/StaffProfileModules/Time/StaffTimePage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Hostel/StudentHostelPage.dart';
 
 import '../../Common/Library/CommonLibraryPage.dart';
@@ -40,14 +42,13 @@ class StaffProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Fees page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentFeesPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    StaffSalaryPage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.attach_money,
@@ -73,7 +74,7 @@ class StaffProfilePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CommonCounselPage(username: username),
+                                    StaffLeavePage(username: username),
                               ),
                             );
                           },
@@ -96,16 +97,21 @@ class StaffProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Feedback page
-                            // (Add navigation logic here)
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    StaffTimePage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
-                            icon: Icons.feedback,
+                            icon: Icons.schedule,
                             color: Colors.pink,
                           ),
                         ),
                         Text(
-                          'Feedback',
+                          'TimeTable',
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Raleway',
@@ -118,14 +124,13 @@ class StaffProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Result page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         TeacherResultPage(username: username),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CommonCounselPage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.school,

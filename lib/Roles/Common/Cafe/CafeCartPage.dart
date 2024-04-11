@@ -12,32 +12,27 @@ class CafeCartPage extends StatefulWidget {
 }
 
 class _CafeCartPageState extends State<CafeCartPage> {
-  List<Map<String, dynamic>> cartData = [];
+  List<dynamic> cartItems = [];
+  double totalPrice = 0.0;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchCartItems();
   }
 
-  Future<void> fetchData() async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            "http://localhost/fyp/app/common/cafe/viewcart.php?username=${widget.username}"),
-        headers: {'Content-Type': 'application/json'},
-      );
+  Future<void> fetchCartItems() async {
+    // Assuming userId is available from somewhere
+    final response = await http.get(Uri.parse(
+        'http://localhost/fyp/app/common/cafe/viewcart.php?username=$widget.username'));
 
-      if (response.statusCode == 200) {
-        List<dynamic> data = json.decode(response.body);
-        setState(() {
-          cartData = List<Map<String, dynamic>>.from(data);
-        });
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (error) {
-      print('Error fetching data: $error');
+    if (response.statusCode == 200) {
+      setState(() {
+        cartItems = jsonDecode(response.body)['items'];
+        totalPrice = jsonDecode(response.body)['totalPrice'];
+      });
+    } else {
+      throw Exception('Failed to load cart items');
     }
   }
 
@@ -45,55 +40,53 @@ class _CafeCartPageState extends State<CafeCartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Cart'),
+        title: Text('My Cart',
+            style:
+                TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // Display the cart items in a table
-            DataTable(
-              columns: [
-                DataColumn(label: Text('No.')),
-                DataColumn(label: Text('Product Name')),
-                DataColumn(label: Text('Price')),
-                DataColumn(label: Text('Quantity')),
-                DataColumn(label: Text('Total')),
-                DataColumn(label: Text('Action')),
-              ],
-              rows: cartData.map((item) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text('${cartData.indexOf(item) + 1}')),
-                    DataCell(Text(item['productName'])),
-                    DataCell(Text('${item['productPrice']}')),
-                    DataCell(
-                      Form(
-                        child: TextFormField(
-                          initialValue: '${item['itemQuantity']}',
-                          onChanged: (value) {
-                            // Implement logic to update quantity
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelText: 'Quantity',
-                          ),
-                        ),
-                      ),
-                    ),
-                    DataCell(
-                        Text('${item['productPrice'] * item['itemQuantity']}')),
-                    DataCell(
-                      ElevatedButton(
-                        onPressed: () {
-                          // Implement logic to remove item
-                        },
-                        child: Text('Remove'),
-                      ),
-                    ),
-                  ],
-                );
-              }).toList(),
+          children: [
+            Text(
+              'Cart Items:',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Raleway',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(cartItems[index]['productName']),
+                    subtitle:
+                        Text('Price: ${cartItems[index]['productPrice']}'),
+                    trailing:
+                        Text('Quantity: ${cartItems[index]['itemQuantity']}'),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Total Price: Rs. $totalPrice',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Raleway',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Implement checkout functionality
+              },
+              child: Text('Go to Checkout'),
             ),
           ],
         ),

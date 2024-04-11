@@ -57,7 +57,15 @@ class _AddPlacementCategoryPageState extends State<AddPlacementCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Category'),
+        title: Text(
+          'Add Category',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0, // Remove app bar shadow
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,7 +76,19 @@ class _AddPlacementCategoryPageState extends State<AddPlacementCategoryPage> {
             children: <Widget>[
               TextFormField(
                 controller: _categoryController,
-                decoration: InputDecoration(labelText: 'Category:*'),
+                decoration: InputDecoration(
+                  labelText: 'Category:*',
+                  hintText: 'Add Category',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the category';
@@ -77,9 +97,25 @@ class _AddPlacementCategoryPageState extends State<AddPlacementCategoryPage> {
                 },
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: addCategory,
-                child: Text('Submit'),
+              SizedBox(
+                width: double.infinity, // Set button width to match parent
+                height: 50, // Set button height
+                child: ElevatedButton(
+                  onPressed: addCategory,
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        color: Colors.white), // Apply Raleway font
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
+                ),
               ),
             ],
           ),

@@ -42,23 +42,34 @@ class _TeacherCoursePageState extends State<TeacherCoursePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teacher Courses'),
+        title: Text('Teacher Courses',
+            style:
+                TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.bold)),
       ),
       body: ListView.builder(
         itemCount: courses.length,
         itemBuilder: (context, index) {
           var course = courses[index];
-          return ListTile(
-            title: Text('Course Code: ${course['course_code']}'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Subject Code: ${course['subject_code']}'),
-                Text('Room No: ${course['room_no']}'),
-                Text('Semester: ${course['semester']}'),
-                Text('Time: ${course['timing_to']}'),
-                Text('Total Classes: ${course['total_classes']}'),
-              ],
+          return Card(
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: ListTile(
+              title: Text('Course Code: ${course['course_code']}',
+                  style: TextStyle(fontFamily: 'Raleway')),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Subject Code: ${course['subject_code']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Room No: ${course['room_no']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Semester: ${course['semester']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Time: ${course['timing_to']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                  Text('Total Classes: ${course['total_classes']}',
+                      style: TextStyle(fontFamily: 'Raleway')),
+                ],
+              ),
             ),
           );
         },

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Credentials/forgot.dart';
+import 'package:flutter_application_1/Modules/Counsel/counsel_home.dart';
 import 'package:flutter_application_1/Modules/Doctor/doctor_home.dart';
+import 'package:flutter_application_1/Modules/Merch/merch_home.dart';
 import 'package:flutter_application_1/Modules/Warden/warden_home.dart';
 import 'package:flutter_application_1/Modules/Chef/chef_home.dart';
 import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
@@ -135,11 +138,25 @@ class _LoginPageState extends State<LoginPage> {
                 builder: (context) => DoctorHomePage(username: username),
               ),
             );
+          } else if (role == 'counsel') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CounselHomePage(username: username),
+              ),
+            );
           } else if (role == 'chef') {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => ChefHomePage(username: username),
+              ),
+            );
+          } else if (role == 'merch') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MerchHomePage(username: username),
               ),
             );
           } else if (role == 'warden') {
@@ -208,6 +225,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Raleway',
               ),
             ),
             SizedBox(height: screenHeight * .01),
@@ -216,6 +234,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black.withOpacity(.6),
+                fontFamily: 'Raleway',
               ),
             ),
             SizedBox(height: screenHeight * .12),
@@ -230,6 +249,11 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               autoFocus: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: screenHeight * .025),
             InputField(
@@ -243,15 +267,28 @@ class _LoginPageState extends State<LoginPage> {
               errorText: passwordError,
               obscureText: true,
               textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   'Forgot Password?',
                   style: TextStyle(
                     color: Colors.black,
+                    fontFamily: 'Raleway',
                   ),
                 ),
               ),
@@ -262,6 +299,14 @@ class _LoginPageState extends State<LoginPage> {
             FormButton(
               text: 'Log In',
               onPressed: loginPage,
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                primary: Colors.blue, // Set button background color
+                textStyle:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
@@ -279,6 +324,7 @@ class InputField extends StatelessWidget {
   final bool autoFocus;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
+  final InputDecoration? decoration;
 
   const InputField({
     required this.labelText,
@@ -289,20 +335,51 @@ class InputField extends StatelessWidget {
     this.autoFocus = false,
     this.onChanged,
     this.onSubmitted,
+    this.decoration,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: autoFocus,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
-      obscureText: obscureText,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
-      autofocus: autoFocus,
+      obscureText: obscureText,
       decoration: InputDecoration(
         labelText: labelText,
         errorText: errorText,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.black, // Border color
+            width: 2.0, // Border width
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.blue, // Focused border color
+            width: 2.0, // Focused border width
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.red, // Error border color
+            width: 2.0, // Error border width
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.red, // Focused error border color
+            width: 2.0, // Focused error border width
+          ),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
       ),
     );
   }
@@ -311,17 +388,35 @@ class InputField extends StatelessWidget {
 class FormButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final ButtonStyle style;
 
   const FormButton({
     required this.text,
     required this.onPressed,
+    this.style = const ButtonStyle(),
   });
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: screenHeight * .02),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        primary: Colors.blue, // Button background color
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontFamily: 'Raleway',
+        ),
+      ).merge(style), // Merge with provided style
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.white), // Set text color to white
+      ),
     );
   }
 }

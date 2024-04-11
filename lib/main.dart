@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Counsel/counsel_home.dart';
 import 'package:flutter_application_1/Modules/Doctor/doctor_home.dart';
+import 'package:flutter_application_1/Modules/Merch/merch_home.dart';
 import 'package:flutter_application_1/Modules/Warden/warden_home.dart';
 import 'package:flutter_application_1/Modules/Chef/chef_home.dart';
 import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
@@ -35,8 +37,11 @@ void main() {
         '/examiner_home': (context) =>
             ExaminerHomePage(username: 'your_username'),
         '/chef_home': (context) => ChefHomePage(username: 'your_username'),
+        '/merch_home': (context) => MerchHomePage(username: 'your_username'),
         '/warden_home': (context) => WardenHomePage(username: 'your_username'),
         '/doctor_home': (context) => DoctorHomePage(username: 'your_username'),
+        '/counsel_home': (context) =>
+            CounselHomePage(username: 'your_username'),
       },
     ),
   );

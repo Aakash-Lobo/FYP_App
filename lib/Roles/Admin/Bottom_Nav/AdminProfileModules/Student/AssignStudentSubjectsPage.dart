@@ -63,21 +63,36 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assign Subjects'),
+        title: Text(
+          'Assign Subjects',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Assign Subjects Page',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
             SizedBox(height: 20.0),
             TextField(
               controller: _courseCodeController,
-              decoration: InputDecoration(labelText: 'Select Course Code'),
+              decoration: InputDecoration(
+                labelText: 'Select Course Code',
+                hintText: 'Select Course',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _selectedCourseCode = value;
@@ -87,7 +102,19 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
             SizedBox(height: 20.0),
             TextField(
               controller: _rollNoController,
-              decoration: InputDecoration(labelText: 'Enter Roll No'),
+              decoration: InputDecoration(
+                labelText: 'Enter Roll No',
+                hintText: 'Add Number',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _rollNo = value;
@@ -98,7 +125,18 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
             TextField(
               controller: _subjectCodeController,
               decoration: InputDecoration(
-                  labelText: 'Enter Subject Code'), // Add subject code field
+                labelText: 'Enter Subject Code',
+                hintText: 'Add Subject',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _subjectCode = value;
@@ -109,7 +147,18 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
             TextField(
               controller: _subjectNameController,
               decoration: InputDecoration(
-                  labelText: 'Enter Subject Name'), // Add subject name field
+                labelText: 'Enter Subject Name',
+                hintText: 'Add Name',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _subjectName = value;
@@ -120,7 +169,18 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
             TextField(
               controller: _semesterController,
               decoration: InputDecoration(
-                  labelText: 'Enter Semester'), // Add semester field
+                labelText: 'Enter Semester',
+                hintText: 'Add Semester',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _semester = value;
@@ -128,9 +188,26 @@ class _AssignSubjectsPageState extends State<AssignSubjectsPage> {
               },
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: _submitForm,
-              child: Text('Submit'),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: _submitForm,
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Raleway', // Apply Raleway font to button text
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  primary: Colors.blue, // Set button background color
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
             // Display subject details here using _subjectDetails list

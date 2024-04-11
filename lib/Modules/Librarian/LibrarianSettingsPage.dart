@@ -65,7 +65,7 @@ class LibrarianSettingsPage extends StatefulWidget {
 class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
   late List<Penalty> penalties = [];
   late List<AllowedDays> allowedDays = [];
-  late List<AllowedBooks> allowedBooks = []; // Initialize with an empty list
+  late List<AllowedBooks> allowedBooks = [];
 
   TextEditingController penaltyController = TextEditingController();
   TextEditingController allowedDaysController = TextEditingController();
@@ -156,7 +156,7 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
 
     if (response.statusCode == 200) {
       fetchPenalties();
-      Navigator.of(context).pop(); // Close the bottom modal sheet
+      Navigator.of(context).pop();
     } else {
       print('Failed to update penalty. Status code: ${response.statusCode}');
     }
@@ -173,7 +173,7 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
 
     if (response.statusCode == 200) {
       fetchAllowedDays();
-      Navigator.of(context).pop(); // Close the bottom modal sheet
+      Navigator.of(context).pop();
     } else {
       print(
           'Failed to update allowed days. Status code: ${response.statusCode}');
@@ -192,7 +192,7 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
 
     if (response.statusCode == 200) {
       fetchAllowedBooks();
-      Navigator.of(context).pop(); // Close the bottom modal sheet
+      Navigator.of(context).pop();
     } else {
       print(
           'Failed to update allowed books. Status code: ${response.statusCode}');
@@ -213,7 +213,7 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
         controller = allowedBooksController;
         break;
       default:
-        controller = TextEditingController(); // Default controller
+        controller = TextEditingController();
         break;
     }
 
@@ -265,7 +265,14 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text(
+          'Settings',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -371,6 +378,112 @@ class _LibrarianSettingsPageState extends State<LibrarianSettingsPage> {
           ],
         );
       }).toList(),
+    );
+  }
+}
+
+class InputField extends StatelessWidget {
+  final String labelText;
+  final String? errorText;
+  final bool obscureText;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final bool autoFocus;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final InputDecoration? decoration;
+
+  const InputField({
+    required this.labelText,
+    this.errorText,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.done,
+    this.autoFocus = false,
+    this.onChanged,
+    this.onSubmitted,
+    this.decoration,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      autofocus: autoFocus,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        labelText: labelText,
+        errorText: errorText,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.black,
+            width: 2.0,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 2.0,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 2.0,
+          ),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+      ),
+    );
+  }
+}
+
+class FormButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final ButtonStyle style;
+
+  const FormButton({
+    required this.text,
+    required this.onPressed,
+    this.style = const ButtonStyle(),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: screenHeight * .02),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        primary: Colors.blue,
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontFamily: 'Raleway',
+        ),
+      ).merge(style),
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

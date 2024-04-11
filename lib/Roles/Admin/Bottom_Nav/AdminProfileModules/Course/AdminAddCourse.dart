@@ -26,7 +26,13 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Add Course Page'),
+        title: Text(
+          'Add Course',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,20 +41,24 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Admin Add Course Information',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Username: ${widget.username}',
-                style: TextStyle(fontSize: 16),
-              ),
               SizedBox(height: 20),
               TextFormField(
                 controller: courseCodeController,
                 decoration: InputDecoration(
                   labelText: 'Course Code:',
                   hintText: 'Enter Course Code',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                style: TextStyle(
+                  fontFamily: 'Raleway', // Apply Raleway font to input text
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -57,11 +67,24 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: courseNameController,
                 decoration: InputDecoration(
                   labelText: 'Course Name:',
                   hintText: 'Enter Course Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                style: TextStyle(
+                  fontFamily: 'Raleway', // Apply Raleway font to input text
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -70,11 +93,24 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: semesterOrYearController,
                 decoration: InputDecoration(
                   labelText: 'Semester or Years:',
                   hintText: 'Enter Semester or Years',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                style: TextStyle(
+                  fontFamily: 'Raleway', // Apply Raleway font to input text
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -83,11 +119,24 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between form fields
               TextFormField(
                 controller: noOfYearController,
                 decoration: InputDecoration(
                   labelText: 'No of Years:',
                   hintText: 'Enter No of Years',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                style: TextStyle(
+                  fontFamily: 'Raleway', // Apply Raleway font to input text
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -96,15 +145,33 @@ class _AdminAddCourseState extends State<AdminAddCourse> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _submitForm();
-                  }
-                },
-                child: Text('Add Course'),
+              SizedBox(height: 20), // Add spacing between form fields
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _submitForm();
+                    }
+                  },
+                  child: Text(
+                    'Add Course',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily:
+                          'Raleway', // Apply Raleway font to button text
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
+                ),
               ),
+              SizedBox(height: 20), // Add spacing between button and bottom
             ],
           ),
         ),

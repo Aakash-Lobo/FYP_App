@@ -48,7 +48,15 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Company'),
+        title: Text(
+          'Add Company',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway',
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0, // Remove app bar shadow
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -57,14 +65,21 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Add Company Page',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
               TextFormField(
                 controller: _companyNameController,
-                decoration: InputDecoration(labelText: 'Company Name:*'),
+                decoration: InputDecoration(
+                  labelText: 'Company Name:*',
+                  hintText: 'Add Name',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the company name';
@@ -72,9 +87,22 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between fields
               TextFormField(
                 controller: _companyAddressController,
-                decoration: InputDecoration(labelText: 'Company Address:*'),
+                decoration: InputDecoration(
+                  labelText: 'Company Address:*',
+                  hintText: 'Add Address',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the company address';
@@ -82,9 +110,22 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 20), // Add spacing between fields
               TextFormField(
                 controller: _companyContactNoController,
-                decoration: InputDecoration(labelText: 'Company Contact No:*'),
+                decoration: InputDecoration(
+                  labelText: 'Company Contact No:*',
+                  hintText: 'Add Number',
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the company contact number';
@@ -93,9 +134,25 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
                 },
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: addCompany,
-                child: Text('Submit'),
+              SizedBox(
+                width: double.infinity, // Set button width to match parent
+                height: 50, // Set button height
+                child: ElevatedButton(
+                  onPressed: addCompany,
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        color: Colors.white), // Apply Raleway font
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    primary: Colors.blue, // Set button background color
+                  ),
+                ),
               ),
             ],
           ),

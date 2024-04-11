@@ -12,26 +12,34 @@ class ViewTeacherProfilePage extends StatefulWidget {
 }
 
 class _ViewTeacherProfilePageState extends State<ViewTeacherProfilePage> {
-  Map<String, dynamic>? userData;
+  Map<String, dynamic>? teacherProfile;
 
   @override
   void initState() {
     super.initState();
-    fetchUserProfile();
+    fetchTeacherProfiles();
   }
 
-  Future<void> fetchUserProfile() async {
+  Future<void> fetchTeacherProfiles() async {
     final url =
-        'http://localhost/fyp/app/student/Side_Nav/view_profile.php'; // Replace with your PHP script URL
-    final response = await http.post(Uri.parse(url), body: {
-      'username': widget.username,
-    });
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        userData = data;
+        Uri.parse('http://localhost/fyp/app/teacher/Side_Nav/view_profile.php');
+    try {
+      final response = await http.post(url, body: {
+        'teacher_email': widget.username,
       });
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body) as List<dynamic>;
+        if (responseData.isNotEmpty) {
+          setState(() {
+            teacherProfile = responseData.first as Map<String, dynamic>;
+          });
+        }
+      } else {
+        throw Exception('Failed to load teacher profiles');
+      }
+    } catch (error) {
+      print(error);
     }
   }
 
@@ -39,21 +47,124 @@ class _ViewTeacherProfilePageState extends State<ViewTeacherProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Profile'),
+        title: Text(
+          'Teacher Profile',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
-      body: userData != null
+      body: teacherProfile != null
           ? SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Display user data here
-                  Text(
-                      'Name: ${userData!['first_name']} ${userData!['middle_name']} ${userData!['last_name']}'),
-                  Text('Email: ${userData!['email']}'),
-                  Text('Mobile Number: ${userData!['mobile_no']}'),
-                  Text('Course Code: ${userData!['course_code']}'),
-                  // Add other user data fields here
+                  Center(
+                    child: CircleAvatar(
+                      radius: 80,
+                      backgroundColor: Colors.grey[200],
+                      child: Icon(
+                        Icons.person,
+                        size: 120,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ListTile(
+                    title: Text(
+                      'First Name:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['first_name']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Middle Name:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['middle_name']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Last Name:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['last_name']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Father\'s Name:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['father_name']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Email:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['email']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Phone No:',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Text(
+                      '${teacherProfile!['phone_no']}',
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                      ),
+                    ),
+                  ),
+                  // Add other ListTile widgets for additional user details
                 ],
               ),
             )

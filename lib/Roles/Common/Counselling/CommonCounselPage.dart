@@ -80,7 +80,13 @@ class _CommonCounselPageState extends State<CommonCounselPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Health Page'),
+        title: Text(
+          'Health Page',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Raleway'), // Apply Raleway font
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -88,20 +94,19 @@ class _CommonCounselPageState extends State<CommonCounselPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Book Appointment',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Specialization:',
+              style: TextStyle(
+                  fontSize: 16, fontFamily: 'Raleway'), // Apply Raleway font
             ),
             SizedBox(height: 20),
-            Text(
-              'Specialization:',
-              style: TextStyle(fontSize: 16),
-            ),
             DropdownButtonFormField<String>(
               value: _selectedDoctor,
               items: _doctors.map((doctor) {
                 return DropdownMenuItem<String>(
                   value: doctor['username'],
-                  child: Text(doctor['spec']),
+                  child: Text(doctor['spec'],
+                      style: TextStyle(
+                          fontFamily: 'Raleway')), // Apply Raleway font
                 );
               }).toList(),
               onChanged: (value) {
@@ -112,19 +117,31 @@ class _CommonCounselPageState extends State<CommonCounselPage> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Select Specialization',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
             SizedBox(height: 20),
             Text(
               'Doctors:',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                  fontSize: 16, fontFamily: 'Raleway'), // Apply Raleway font
             ),
+            SizedBox(height: 20),
             DropdownButtonFormField<String>(
               value: _selectedDoctor,
               items: _doctors.map((doctor) {
                 return DropdownMenuItem<String>(
                   value: doctor['username'],
-                  child: Text('${doctor['fname']} ${doctor['lname']}'),
+                  child: Text('${doctor['fname']} ${doctor['lname']}',
+                      style: TextStyle(
+                          fontFamily: 'Raleway')), // Apply Raleway font
                 );
               }).toList(),
               onChanged: (value) {
@@ -135,12 +152,38 @@ class _CommonCounselPageState extends State<CommonCounselPage> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Select Doctor',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _bookAppointment,
-              child: Text('Book Appointment'),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _bookAppointment,
+                child: Text(
+                  'Book Appointment',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Raleway',
+                      color:
+                          Colors.white), // Apply Raleway font and white color
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  primary: Colors.blue,
+                  padding: EdgeInsets.symmetric(
+                      vertical: 15), // Set button background color
+                ),
+              ),
             ),
           ],
         ),

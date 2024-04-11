@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Librarian/AddBooksPage.dart';
 import 'package:flutter_application_1/Modules/Librarian/BookViewPage%20.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -291,6 +292,17 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddBooksPage(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Examiner/examiner_home.dart';
 import 'package:flutter_application_1/Roles/Common/Cafe/StudentCafePage.dart';
 import 'package:flutter_application_1/Roles/Common/Counselling/CommonCounselPage.dart';
 import 'package:flutter_application_1/Roles/Common/Health/CommonHealthPage.dart';
 import 'package:flutter_application_1/Roles/Student/Bottom_Nav/StudentProfileModules/Hostel/StudentHostelPage.dart';
 import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Attendance/AttendanceStudentPage.dart';
 import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Course/TeacherCoursePage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Feedback/TeacherFeedbackPage.dart';
 import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Leave/TeacherLeavePage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Notes/TeacherNotesPage.dart';
 import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Result/TeacherResultPage.dart';
+import 'package:flutter_application_1/Roles/Teacher/Bottom_Nav/TeacherProfileModules/Salary/TeacherSalaryPage.dart';
 import '../../Common/Library/CommonLibraryPage.dart';
 import '../../Common/Merch/StudentMerchPage.dart';
 
@@ -48,7 +52,7 @@ class TeacherProfilePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    AttendanceStudentPage(username: username),
+                                    TeacherCoursePage(username: username),
                               ),
                             );
                           },
@@ -72,12 +76,13 @@ class TeacherProfilePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Navigate to the Examination page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => StudentExaminationPage(username: username),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ExaminerHomePage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.assignment,
@@ -98,14 +103,13 @@ class TeacherProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Placement page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentPlacementPage(username: username),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    TeacherNotesPage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.work,
@@ -126,14 +130,13 @@ class TeacherProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Courses page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentCoursesPage(username: username),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CommonCounselPage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.school,
@@ -160,14 +163,13 @@ class TeacherProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Fees page
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         StudentFeesPage(username: "username"),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    TeacherSalaryPage(username: "username"),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.attach_money,
@@ -221,7 +223,7 @@ class TeacherProfilePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CommonCounselPage(username: username),
+                                    TeacherLeavePage(username: username),
                               ),
                             );
                           },
@@ -244,8 +246,13 @@ class TeacherProfilePage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Navigate to the Feedback page
-                            // (Add navigation logic here)
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    TeacherFeedbackPage(username: username),
+                              ),
+                            );
                           },
                           child: CustomSquare(
                             icon: Icons.feedback,

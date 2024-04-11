@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Modules/Chef/AddMenuPage.dart';
 import 'package:http/http.dart' as http;
 
 class ViewMenuPage extends StatefulWidget {
@@ -119,6 +120,17 @@ class _ViewMenuPageState extends State<ViewMenuPage> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddMenuPage(username: widget.username),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

@@ -50,36 +50,93 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Attendance'),
+        title: Text(
+          'Student Attendance',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Raleway', // Apply Raleway font to app bar title
+          ),
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Student Attendance',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
             SizedBox(height: 20.0),
             TextField(
               controller: _courseCodeController,
-              decoration: InputDecoration(labelText: 'Enter Course Code'),
+              decoration: InputDecoration(
+                labelText: 'Enter Course Code',
+                hintText: 'Add Course',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
             TextField(
               controller: _semesterController,
-              decoration: InputDecoration(labelText: 'Enter Semester'),
+              decoration: InputDecoration(
+                labelText: 'Enter Semester',
+                hintText: 'Add Semester',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
             TextField(
               controller: _subjectCodeController,
-              decoration: InputDecoration(labelText: 'Enter Subject Code'),
+              decoration: InputDecoration(
+                labelText: 'Enter Subject Code',
+                hintText: 'Add Subject',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: _submitForm,
-              child: Text('Submit'),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: _submitForm,
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Raleway', // Apply Raleway font to button text
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  primary: Colors.blue, // Set button background color
+                ),
+              ),
             ),
             SizedBox(height: 20.0),
             // Display student roll numbers and attendance options
@@ -88,7 +145,11 @@ class _StudentAttendancePageState extends State<StudentAttendancePage> {
               itemCount: _rollNumbers.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text('Roll Number: ${_rollNumbers[index]}'),
+                  title: Text(
+                    'Roll Number: ${_rollNumbers[index]}',
+                    style:
+                        TextStyle(fontFamily: 'Raleway'), // Apply Raleway font
+                  ),
                   trailing: Checkbox(
                     value: _attendances[index],
                     onChanged: (value) {
