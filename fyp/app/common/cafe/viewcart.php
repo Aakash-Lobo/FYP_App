@@ -10,34 +10,40 @@ $conn = mysqli_connect($host, $username, $password, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-
+// $username = 'aakash@gmail.com';
 // Fetch username from the request
 $username = $_GET['username'];
+$sql = "SELECT viewcart.* FROM viewcart INNER JOIN student_info ON viewcart.userId = student_info.roll_no WHERE student_info.email= '$username'";
+$result = mysqli_query($conn, $sql);
+$cartItems = array();
+$totalPrice = 0.0;
+$counter = 0;
 
-// Query to select cart items for the user with the given username
-$query = "SELECT cafe_product.productName, cafe_product.productPrice, viewcart.itemQuantity
-          FROM cafe_product
-          INNER JOIN viewcart ON cafe_product.productId = viewcart.productId
-          INNER JOIN student_info ON viewcart.userId = student_info.roll_no
-          INNER JOIN login ON student_info.email = login.username
-          WHERE login.username = '$username'";
+while($row = mysqli_fetch_assoc($result)) {
+    $productId = $row['productId'];
+    $quantity = $row['itemQuantity'];
+    $productSql = "SELECT * FROM `cafe_product` WHERE productId = $productId";
+    $productResult = mysqli_query($conn, $productSql);
+    $productRow = mysqli_fetch_assoc($productResult);
+    $productName = $productRow['productName'];
+    $productPrice = $productRow['productPrice'];
+    $total = $productPrice * $quantity;
+    $counter++;
+    $totalPrice += $total;
 
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die("Query failed: " . mysqli_error($conn));
+    $cartItems[] = array(
+        'productId' => $productId,
+        'productName' => $productName,
+        'productPrice' => $productPrice,
+        'itemQuantity' => $quantity
+    );
 }
 
-$cartData = array();
+$response = array(
+    'items' => $cartItems,
+    'totalPrice' => $totalPrice
+);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $cartData[] = $row;
-}
+echo json_encode($response);
 
-// Set response header and send JSON encoded data
-header('Content-Type: application/json');
-echo json_encode($cartData);
-
-// Close connection
-mysqli_close($conn);
 ?>

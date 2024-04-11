@@ -14,7 +14,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM `pizza`";
+$sql = "SELECT * FROM `cafe_product`";
 $result = mysqli_query($conn, $sql);
 
 $pizzas = array();
